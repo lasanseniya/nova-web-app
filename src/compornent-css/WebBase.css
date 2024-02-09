@@ -1,0 +1,21 @@
+
+.left-panel-container {
+    /* position: relative; */
+    width:20%;
+    min-height: 100vh;
+    background-image: linear-gradient(180deg, #01142a 3%, #00387B 100%);
+    z-index: 2;
+}
+.right-panel-container {
+
+    /* position: relative; */
+    /* position: fixed;
+    left:20%; */
+    width:100%;
+    min-height: 100vh;
+    background-color: #01142a;
+    z-index: -1;
+    /* background-image: linear-gradient(180deg, #01142a 3%, #00387B 100%); */
+}
+
+  
