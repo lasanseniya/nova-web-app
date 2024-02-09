@@ -1,10 +1,44 @@
 
+  @import url('https://fonts.googleapis.com/css2?family=PT+Sans:wght@700&display=swap');
+
 .left-panel-container {
     /* position: relative; */
     width:20%;
     min-height: 100vh;
     background-image: linear-gradient(180deg, #01142a 3%, #00387B 100%);
     z-index: 2;
+}
+.logo-section{
+    display: flex;
+  align-items: center;
+    position: relative;
+    left: -2px;
+    padding-bottom: 30px;
+    box-shadow: inset 0 -1px 0 rgba(243, 243, 243, 0.3);
+    -webkit-background-clip: padding-box; /* for Safari */
+    background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+}
+
+.logo-section:after {
+    content: "";
+    background: black;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 50%;
+    width: 1px;
+  }
+.logo-section img{
+    position: relative;
+    left: 3em;
+    top: 1em;
+    width: 30%; 
+}
+.logo-section span{
+    position: relative;
+    left: 1em;
+    top: .3em;
+    font-size: 50px;
 }
 .right-panel-container {
 
@@ -15,7 +49,178 @@
     min-height: 100vh;
     background-color: #01142a;
     z-index: -1;
+    color: #f3f3f3;
+    font-size: large;
+    font-family: 'PT Sans', sans-serif;
     /* background-image: linear-gradient(180deg, #01142a 3%, #00387B 100%); */
 }
 
+/* screen responsible */
+@media only screen and (max-width: 368px) {
+ 
+    .logo-section{
+        display: flex;
+      align-items: center;
+        /* position: relative;
+        top: 2em; */
+        /* left: 1em; */
+    }
+    .logo-section img{
+        display: flex;
+      align-items: center;
+        position: relative;
+        left: .3em;
+        top: 1em;
+        width: 30%; 
+    }
+    .logo-section span{
+        position: relative;
+        left: .4em;
+        top: 1.8em;
+        font-size: 10px;
+    }
+
+  }
+  @media only screen and (min-width: 368px) and (max-width:491px){
+    .logo-section{
+        display: flex;
+      align-items: center;
+        /* position: relative;
+        top: 2em; */
+        /* left: 1em; */
+    }
+    .logo-section img{
+        position: relative;
+        left: .3em;
+        top: 1em;
+        width: 30px; 
+    }
+    .logo-section span{
+        position: relative;
+        left: .1em;
+        top: .9em;
+        font-size: 18px;
+    }
+  }
+  
+
+  @media only screen and (min-width: 491px) and (max-width:675px){
+    .logo-section{
+        display: flex;
+      align-items: center;
+        /* position: relative;
+        top: 2em; */
+        /* left: 1em; */
+    }
+    .logo-section img{
+        position: relative;
+        left: .3em;
+        top: 1em;
+        width: 40px; 
+    }
+    .logo-section span{
+        position: relative;
+        left: .1em;
+        top: .8em;
+        font-size: 24px;
+    }
+  }
+  
+
+  /* Tablets */
+  @media only screen and (min-width: 676px) and (max-width:990px){
+    .logo-section{
+        display: flex;
+      align-items: center;
+        /* position: relative;
+        top: 2em; */
+        /* left: 1em; */
+    }
+    .logo-section img{
+        display: flex;
+      align-items: center;
+        position: relative;
+        left: .3em;
+        top: 1em;
+        width: 60px; 
+    }
+    .logo-section span{
+        position: relative;
+        left: .01em;
+        top: .4em;
+        font-size: 35px;
+    }
+  }
+  @media only screen and (min-width: 990px) and (max-width:1048px){
+    .logo-section{
+        display: flex;
+      align-items: center;
+        position: relative;
+        /* top: 2em;  */
+        left: .5em;
+    }
+    .logo-section img{
+        display: flex;
+      align-items: center;
+        position: relative;
+        left: .3em;
+        top: 1em;
+        width: 60px; 
+    }
+    .logo-section span{
+        position: relative;
+        left: .01em;
+        top: .4em;
+        font-size: 39px;
+    }
+  }
+  @media only screen and (min-width: 1048px) and (max-width:1375px){
+    .logo-section{
+        display: flex;
+      align-items: center;
+        position: relative;
+        /* top: 2em;  */
+        left: .4em;
+    }
+    .logo-section img{
+        display: flex;
+      align-items: center;
+        position: relative;
+        left: .3em;
+        top: 1em;
+        width: 80px; 
+    }
+    .logo-section span{
+        position: relative;
+        left: .01em;
+        top: .4em;
+        font-size: 45px;
+    }
+  }
+
+
+  /* Tablets */
+  @media only screen and (min-width: 1375px) {
+    .logo-section{
+        display: flex;
+      align-items: center;
+        /* position: relative; */
+        /* top: 2em; */ 
+        /* left: .5em; */
+    }
+    .logo-section img{
+        display: flex;
+      align-items: center;
+        position: relative;
+        left: .3em;
+        top: 1em;
+        width: 40%; 
+    }
+    .logo-section span{
+        position: relative;
+        left: .01em;
+        top: .4em;
+        font-size: 59px;
+    }
+  }
   
