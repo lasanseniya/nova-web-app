@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import logo from "../assets/logo.png";
+import userLogo from "../assets/userLogo.png";
+import user from "../assets/user.png";
 import "../compornent-css/WebBase.css";
 
 const WebBase = () => {
   const [newNoteButnClicked, setNewNoteButnClicked] = useState(true);
   const [myNotesButnClicked, setMyNotesButnClicked] = useState(false);
+  const [userName, setUserName] = useState("<user name>");
   return (
     <div>
       <div className="right-panel-container">
@@ -31,6 +34,10 @@ const WebBase = () => {
             >
               My Notes
             </div>
+            <div className="welcome-note-section">
+              
+              <span>Welcome,  {userName}!</span>
+            <img src={user} alt="user logo" /></div>
           </div>
         </div>
       </div>

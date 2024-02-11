@@ -51,6 +51,25 @@
   font-size: large;
   font-family: "PT Sans", sans-serif;
 }
+/* welcome note stylings */
+.welcome-note-section {
+  margin-top: calc(100vh - 41em);
+  margin-left: calc(100vw - 40em);
+  min-width: calc(100% - 30px);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-align: baseline;
+  scale: 0.35;
+}
+
+.welcome-note-section img {
+  margin-left: 60px;
+}
+
+.welcome-note-section span {
+  white-space: nowrap;
+}
 
 /* button stylings */
 
@@ -282,116 +301,136 @@
     top: 1.8em;
     font-size: 10px;
   }
+  /* welcome note stylings */
+  .welcome-note-section {
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 11em;
+    min-width: calc(100% - 30px);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: baseline;
+    scale: 0.8;
+  }
+
+  .welcome-note-section img {
+    margin-left: 10px;
+  }
+
+  .welcome-note-section span {
+    white-space: nowrap;
+  }
 
   /* new note btn */
 
- /* before hover */
- .new-note-btn {
-  font-family: "Sofia Sans", sans-serif;
-  position: absolute;
-  display: flex;
-  left: -66.5%;
-  top: 6em;
-  min-width: 10em;
-  align-items: center;
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
-  box-sizing: border-box;
-  color: #f3f3f3;
-  display: inline-flex;
-  flex: 1 1 auto;
-  font-family: Inter, sans-serif;
-  font-size: 1.2rem;
-  font-weight: 200;
-  justify-content: center;
-  line-height: 1;
-  margin: 0;
-  outline: none;
-  padding: 1rem 1.2rem;
-  text-align: center;
-  text-decoration: none;
-  transition: box-shadow 0.2s, -webkit-box-shadow 0.2s;
-  white-space: nowrap;
-  border: 0;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-  transition: background-color 0.3s cubic-bezier(0.47, 0, 0.745, 0.715),
-    box-shadow 0.3s cubic-bezier(0.47, 0, 0.745, 0.715);
+  /* before hover */
+  .new-note-btn {
+    font-family: "Sofia Sans", sans-serif;
+    position: absolute;
+    display: flex;
+    left: -66.5%;
+    top: 6em;
+    min-width: 10em;
+    align-items: center;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    box-sizing: border-box;
+    color: #f3f3f3;
+    display: inline-flex;
+    flex: 1 1 auto;
+    font-family: Inter, sans-serif;
+    font-size: 1.2rem;
+    font-weight: 200;
+    justify-content: center;
+    line-height: 1;
+    margin: 0;
+    outline: none;
+    padding: 1rem 1.2rem;
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow 0.2s, -webkit-box-shadow 0.2s;
+    white-space: nowrap;
+    border: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    transition: background-color 0.3s cubic-bezier(0.47, 0, 0.745, 0.715),
+      box-shadow 0.3s cubic-bezier(0.47, 0, 0.745, 0.715);
 
-  scale: 0.3;
-}
-/* hover */
-.new-note-btn:hover,
-.new-note-btn:focus {
-  font-family: "Sofia Sans", sans-serif;
-  position: absolute;
-  display: flex;
-  left: -66.5%;
-  top: 6em;
-  min-width: 10em;
-  align-items: center;
-  background-color: #01142a;
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
-  box-shadow: transparent 0 0 0 1px, rgba(0, 132, 255, 0.9) -4px 0px 9.8px;
-  box-sizing: border-box;
-  color: rgb(0, 132, 255);
-  cursor: pointer;
-  display: inline-flex;
-  flex: 1 1 auto;
-  font-family: Inter, sans-serif;
-  font-size: 1.2rem;
-  font-weight: 200;
-  justify-content: center;
-  line-height: 1;
-  margin: 0;
-  outline: none;
-  padding: 1rem 1.2rem;
-  text-align: center;
-  text-decoration: none;
-  transition: box-shadow 0.2s, -webkit-box-shadow 0.2s;
-  white-space: nowrap;
-  border: 0;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
+    scale: 0.3;
+  }
+  /* hover */
+  .new-note-btn:hover,
+  .new-note-btn:focus {
+    font-family: "Sofia Sans", sans-serif;
+    position: absolute;
+    display: flex;
+    left: -66.5%;
+    top: 6em;
+    min-width: 10em;
+    align-items: center;
+    background-color: #01142a;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    box-shadow: transparent 0 0 0 1px, rgba(0, 132, 255, 0.9) -4px 0px 9.8px;
+    box-sizing: border-box;
+    color: rgb(0, 132, 255);
+    cursor: pointer;
+    display: inline-flex;
+    flex: 1 1 auto;
+    font-family: Inter, sans-serif;
+    font-size: 1.2rem;
+    font-weight: 200;
+    justify-content: center;
+    line-height: 1;
+    margin: 0;
+    outline: none;
+    padding: 1rem 1.2rem;
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow 0.2s, -webkit-box-shadow 0.2s;
+    white-space: nowrap;
+    border: 0;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
 
-  scale: 0.3;
-}
+    scale: 0.3;
+  }
 
-/* after click */
-.new-note-btn.clicked {
-  font-family: "Sofia Sans", sans-serif;
-  position: absolute;
-  display: flex;
-  left: -66.5%;
-  top: 6em;
-  min-width: 10em;
-  align-items: center;
-  background-color: #01142a;
-  border-top-left-radius: 12px;
-  border-bottom-left-radius: 12px;
-  box-shadow: transparent 0 0 0 1px, rgba(0, 132, 255, 0.9) -5px 0px 9.8px;
-  box-sizing: border-box;
-  color: rgb(0, 132, 255);
-  cursor: pointer;
-  display: inline-flex;
-  flex: 1 1 auto;
-  font-family: Inter, sans-serif;
-  font-size: 1.2rem;
-  font-weight: 200;
-  justify-content: center;
-  line-height: 1;
-  margin: 0;
-  outline: none;
-  padding: 1rem 1.2rem;
-  text-align: center;
-  text-decoration: none;
-  border: 0;
+  /* after click */
+  .new-note-btn.clicked {
+    font-family: "Sofia Sans", sans-serif;
+    position: absolute;
+    display: flex;
+    left: -66.5%;
+    top: 6em;
+    min-width: 10em;
+    align-items: center;
+    background-color: #01142a;
+    border-top-left-radius: 12px;
+    border-bottom-left-radius: 12px;
+    box-shadow: transparent 0 0 0 1px, rgba(0, 132, 255, 0.9) -5px 0px 9.8px;
+    box-sizing: border-box;
+    color: rgb(0, 132, 255);
+    cursor: pointer;
+    display: inline-flex;
+    flex: 1 1 auto;
+    font-family: Inter, sans-serif;
+    font-size: 1.2rem;
+    font-weight: 200;
+    justify-content: center;
+    line-height: 1;
+    margin: 0;
+    outline: none;
+    padding: 1rem 1.2rem;
+    text-align: center;
+    text-decoration: none;
+    border: 0;
 
-  scale: 0.3;
-}
+    scale: 0.3;
+  }
 
   /* my notes btn */
 
@@ -523,7 +562,26 @@
     top: 0.9em;
     font-size: 18px;
   }
+  /* welcome note stylings */
+  .welcome-note-section {
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 11em;
+    min-width: calc(100% - 30px);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: baseline;
+    scale: 0.7;
+  }
 
+  .welcome-note-section img {
+    margin-left: 10px;
+  }
+
+  .welcome-note-section span {
+    white-space: nowrap;
+  }
   /* new note btn */
 
   /* before hover */
@@ -634,7 +692,7 @@
     scale: 0.3;
   }
 
-   /* my notes btn */
+  /* my notes btn */
 
   /* before hover */
   .my-notes-btn {
@@ -762,7 +820,26 @@
     top: 0.8em;
     font-size: 24px;
   }
+  /* welcome note stylings */
+  .welcome-note-section {
+    position: absolute;
+    margin-top: 10px;
+    margin-left: 15em;
+    min-width: calc(100% - 30px);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: baseline;
+    scale: 0.5;
+  }
 
+  .welcome-note-section img {
+    margin-left: 10px;
+  }
+
+  .welcome-note-section span {
+    white-space: nowrap;
+  }
   /* new note btn */
 
   /* before hover */
@@ -1008,6 +1085,27 @@
     font-size: 35px;
   }
 
+  /* welcome note stylings */
+  .welcome-note-section {
+    position: absolute;
+    margin-top: 30px;
+    margin-left: 27em;
+    min-width: calc(100% - 30px);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: baseline;
+    scale: 0.45;
+  }
+
+  .welcome-note-section img {
+    margin-left: 30px;
+  }
+
+  .welcome-note-section span {
+    white-space: nowrap;
+  }
+
   /* new note btn */
 
   /* before hover */
@@ -1250,7 +1348,26 @@
     top: 0.4em;
     font-size: 39px;
   }
+  /* welcome note stylings */
+  .welcome-note-section {
+    position: absolute;
+    margin-top: 30px;
+    margin-left: 32em;
+    min-width: calc(100% - 30px);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: baseline;
+    scale: 0.6;
+  }
 
+  .welcome-note-section img {
+    margin-left: 40px;
+  }
+
+  .welcome-note-section span {
+    white-space: nowrap;
+  }
   /* new note btn */
 
   /* before hover */
@@ -1493,6 +1610,26 @@
     top: 0.4em;
     font-size: 45px;
   }
+  /* welcome note stylings */
+  .welcome-note-section {
+    position: absolute;
+    margin-top: 29px;
+    margin-left: 37em;
+    min-width: calc(100% - 30px);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: baseline;
+    scale: 0.6;
+  }
+
+  .welcome-note-section img {
+    margin-left: 40px;
+  }
+
+  .welcome-note-section span {
+    white-space: nowrap;
+  }
 
   /* new note btn */
 
@@ -1715,7 +1852,27 @@
   }
 }
 
-@media only screen and (min-width: 1279px)and (max-width: 1375px) {
+@media only screen and (min-width: 1279px) and (max-width: 1375px) {
+  /* welcome note stylings */
+  .welcome-note-section {
+    position: absolute;
+    margin-top: 30px;
+    margin-left: 47em;
+    min-width: calc(100% - 30px);
+    width: 100%;
+    display: flex;
+    align-items: center;
+    text-align: baseline;
+    scale: 0.5;
+  }
+
+  .welcome-note-section img {
+    margin-left: 40px;
+  }
+
+  .welcome-note-section span {
+    white-space: nowrap;
+  }
   /* new note btn */
 
   /* before hover */
@@ -1826,7 +1983,7 @@
     scale: 1;
   }
 
-   /* my notes btn */
+  /* my notes btn */
 
   /* before hover */
   .my-notes-btn {
