@@ -3,7 +3,8 @@ import logo from "../assets/logo.png";
 import "../compornent-css/WebBase.css";
 
 const WebBase = () => {
-  const [newNoteButnClicked, setNewNoteButnClicked] = useState(false);
+  const [newNoteButnClicked, setNewNoteButnClicked] = useState(true);
+  const [myNotesButnClicked, setMyNotesButnClicked] = useState(false);
   return (
     <div>
       <div className="right-panel-container">
@@ -12,16 +13,23 @@ const WebBase = () => {
             <img src={logo} alt="logo" />
             <span className="logo-text">Nova</span>
 
-            <div className={`new-note-btn ${newNoteButnClicked ? 'clicked' : ''}`} onClick={()=>{
-              setNewNoteButnClicked(true);
-            }}>
-              <div class="line"></div>
-              <div class="line"></div>
-              <div class="line"></div>
-              <div class="line"></div>
-              <div class="line"></div>
-              <div class="line"></div>
+            <div
+              className={`new-note-btn ${newNoteButnClicked ? "clicked" : ""}`}
+              onClick={() => {
+                setMyNotesButnClicked(false);
+                setNewNoteButnClicked(true);
+              }}
+            >
               New Note
+            </div>
+            <div
+              className={`my-notes-btn ${myNotesButnClicked ? "clicked" : ""}`}
+              onClick={() => {
+                setMyNotesButnClicked(true);
+                setNewNoteButnClicked(false);
+              }}
+            >
+              My Notes
             </div>
           </div>
         </div>
