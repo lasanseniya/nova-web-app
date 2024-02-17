@@ -2117,3 +2117,23 @@
     font-size: 59px;
   }
 }
+
+.new-note-container {
+  height: 80vh;
+  width: 80vw;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  color: white;
+  border: 2px solid white; /*Setting up border for the div element for visibility*/
+}
+
+.my-notes-container {
+  height: 80vh;
+  width: 80vw;
+  right: 0;
+  bottom: 0;
+  position: absolute;
+  color: white;
+  border: 2px solid white; /*Setting up border for the div element for visibility*/
+}
