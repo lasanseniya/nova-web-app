@@ -1,7 +1,7 @@
 import { useState } from "react";
 import logo from "../assets/logo.png";
 import user from "../assets/user.png";
-import "../compornent-css/WebBase.css";
+import "../component-css/WebBase.css";
 
 const WebBase = () => {
   const [newNoteButnClicked, setNewNoteButnClicked] = useState(false);
@@ -47,8 +47,18 @@ const WebBase = () => {
           </div>
         </div>
       </div>
-      {newNoteButnClicked && <div className="new-note-container">New Note</div>}
-      {myNotesButnClicked && <div className="my-notes-container">My Notes</div>}
+      {/*{Adding new-note window to the web base}*/}
+      {newNoteButnClicked && (
+        <div className="new-note-container">
+          <div className="div1"> </div>
+          <div className="div2"> </div>
+          <div className="div3"> </div>
+        </div>
+      )}{" "}
+      {/*{Adding my-notes window to the web base}*/}
+      {myNotesButnClicked && (
+        <div className="my-notes-container">My Notes</div>
+      )}{" "}
     </div>
   );
 };

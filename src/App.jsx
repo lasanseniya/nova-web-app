@@ -3,7 +3,7 @@
 // import viteLogo from "/vite.svg";
 import "./App.css";
 
-import WebBase from "./compornents/WebBase.jsx";
+import WebBase from "./components/WebBase.jsx";
 
 // import React from "react";
 function App() {
