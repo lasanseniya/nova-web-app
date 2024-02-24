@@ -1,9 +1,12 @@
+import React from "react";
+
 function NewNote() {
   return (
-    <div className="sm:ml-64">
-      <div className="mt-14 rounded-lg border-2 border-dashed border-gray-200 p-4 dark:border-gray-700">
-        New note area
-      </div>
+    <div
+      className="absolute border-2 bg-[#f3f3f3] border-gray-200 border-dashed rounded-lg dark:border-gray-700 top-20 sm:left-64
+      p-20"
+    >
+      New note area
     </div>
   );
 }
