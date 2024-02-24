@@ -1,28 +1,26 @@
 import { useState } from "react";
-import logo from "../assets/logo.png";
-import user from "../assets/user.png";
-import "../component-css/WebBase.css";
 import Sidebar from "./Sidebar";
 import NavBar from "./NavBar";
 
+import MyNotes from "./MyNotes";
+import NewNote from "./NewNote";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 const WebBase = () => {
-  const [newNoteButnClicked, setNewNoteButnClicked] = useState(false);
-  const [myNotesButnClicked, setMyNotesButnClicked] = useState(false);
   const [userName, setUserName] = useState("<user name>");
-
-  function handleNewNoteClick() {
-    setNewNoteButnClicked(true);
-  }
-
-  function handleMyNotesClick() {
-    setMyNotesButnClicked(true);
-    setNewNoteButnClicked(false);
-  }
 
   return (
     <>
-      <Sidebar />
       <NavBar userName={userName} />
+      <BrowserRouter>
+        <Sidebar />
+
+        <Routes>
+          <Route path="/New-Note" element={<NewNote />} />
+          <Route path="/My-Notes" element={<MyNotes />} />
+        </Routes>
+        <div className="bg-[rgb(1,20,42)] z-0 h-screen"></div>
+      </BrowserRouter>
     </>
   );
 };
