@@ -19,7 +19,6 @@ const WebBase = () => {
           <Route path="/New-Note" element={<NewNote />} />
           <Route path="/My-Notes" element={<MyNotes />} />
         </Routes>
-        <div className="bg-[rgb(1,20,42)] z-0 h-screen"></div>
       </BrowserRouter>
     </>
   );
