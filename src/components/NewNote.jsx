@@ -7,11 +7,11 @@ function NewNote() {
         <div className="h-full flex-row border-2 border-dashed border-[#2e2e2e]">
           {/*Youtube link and Generate button container*/}
           <div className="flex place-content-center">
-            <div className="lg:3/5 relative w-full flex-col rounded-lg bg-slate-100 p-2 sm:w-4/5">
+            <div className="relative w-full flex-col rounded-lg bg-slate-100 p-2 sm:w-4/5 lg:w-2/5">
               <input
                 type="text"
                 placeholder="YouTube link goes here..."
-                className="w-full bg-slate-100 text-slate-900"
+                className="w-full bg-slate-100 text-slate-900 focus:outline-none"
               />
               <button className="absolute right-1 top-1 rounded-lg bg-blue-500 px-3.5 py-1 shadow-lg shadow-blue-500/50">
                 Generate
