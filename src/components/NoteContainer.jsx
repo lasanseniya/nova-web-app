@@ -1,7 +1,7 @@
 function NoteContainer() {
   return (
     <>
-      <div className="flex-1 p-10 sm:grid sm:grid-cols-3 sm:grid-rows-10 sm:gap-4">
+      <div className="flex-1 overflow-y-scroll p-10 sm:grid sm:grid-cols-3 sm:grid-rows-10 sm:gap-4">
         <div
           contentEditable
           className="col-span-1 row-span-10 rounded-md border border-dashed"
