@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Sidebar from "./Sidebar";
 import NavBar from "./NavBar";
+import { Outlet } from "react-router-dom";
 
 const WebBase = () => {
   const [userName, setUserName] = useState("<user name>");
@@ -9,6 +10,7 @@ const WebBase = () => {
     <>
       <NavBar userName={userName} />
       <Sidebar />
+      <Outlet />
     </>
   );
 };

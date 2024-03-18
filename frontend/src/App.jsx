@@ -1,6 +1,11 @@
 import "./App.css";
 
-import { createBrowserRouter, createRoutesFromElements, RouterProvider, Route } from "react-router-dom";
+import {
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+  Route,
+} from "react-router-dom";
 
 import Layout from "./pages/Layout.jsx";
 import Home from "./pages/Home.jsx";
@@ -12,17 +17,17 @@ import MyNotes from "./components/MyNotes.jsx";
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<Layout/>}>
-      <Route index element={<Home />}/>,
-      <Route path="/login" element={<LoginPage />}/>,
-      <Route path="/register" element={<RegisterPage />}/>,
+    <Route path="/" element={<Layout />}>
+      <Route index element={<Home />} />,
+      <Route path="/login" element={<LoginPage />} />,
+      <Route path="/register" element={<RegisterPage />} />,
       <Route path="/dashboard" element={<WebBase />}>
-        <Route index element={<MyNotes />}/>,
-        <Route path="new" element={<NewNote />}/>,
+        <Route index element={<NewNote />} />,
+        <Route path="my-notes" element={<MyNotes />} />,
       </Route>
-    </Route>
-  )
-)
+    </Route>,
+  ),
+);
 
 function App() {
   return <RouterProvider router={routes} />;
