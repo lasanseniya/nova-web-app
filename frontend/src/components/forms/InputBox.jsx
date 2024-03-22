@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 
 function InputBox(props) {
     return (
@@ -10,4 +11,12 @@ function InputBox(props) {
       />
     );
 }
+
+InputBox.propTypes = {
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired, // Added prop validation for 'name'
+    type: PropTypes.string.isRequired, // Added prop validation for 'type'
+    placeholder: PropTypes.string.isRequired,
+};
+
 export default InputBox
