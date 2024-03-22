@@ -114,7 +114,7 @@ function NewNote() {
         setQuestions(questions);
       }
     }
-  }, [structuredNoteWithQs]);
+  }, [structuredNoteWithQs, noteSummary, questions]);
 
   return (
     <div className="sm:ml-64">
