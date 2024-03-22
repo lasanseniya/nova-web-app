@@ -14,6 +14,8 @@ import RegisterPage from "./pages/RegisterPage.jsx";
 import WebBase from "./components/WebBase.jsx";
 import NewNote from "./components/NewNote.jsx";
 import MyNotes from "./components/MyNotes.jsx";
+import Error401 from "./pages/Error401.jsx";
+import ProtectedRoutes from "./utils/ProtectedRoutes.jsx";
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
@@ -21,10 +23,13 @@ const routes = createBrowserRouter(
       <Route index element={<Home />} />,
       <Route path="/login" element={<LoginPage />} />,
       <Route path="/register" element={<RegisterPage />} />,
-      <Route path="/dashboard" element={<WebBase />}>
-        <Route index element={<NewNote />} />,
-        <Route path="my-notes" element={<MyNotes />} />,
+      <Route element={<ProtectedRoutes />}>
+        <Route path="/dashboard" element={<WebBase />}>
+          <Route index element={<NewNote />} />,
+          <Route path="my-notes" element={<MyNotes />} />,
+        </Route>
       </Route>
+      <Route path="/error" element={<Error401 />} />,
     </Route>,
   ),
 );
