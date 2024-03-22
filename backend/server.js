@@ -4,6 +4,11 @@ require('dotenv').config();
 const cors = require('cors');
 const { router } = require('./routes/router'); 
 
+// Establish connection to mongodb database
+const connectDB = require("./config/dbConnection");
+
+connectDB();  // Connect to database
+
 // Middlewares
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
