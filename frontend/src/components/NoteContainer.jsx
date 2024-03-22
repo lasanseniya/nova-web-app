@@ -2,7 +2,7 @@ import parse from "html-react-parser";
 
 import PropTypes from "prop-types";
 
-function NoteContainer({ structuredNote, summary, questions }) {
+function NoteContainer({ structuredNote = "", summary = "", questions = "" }) {
   const structuredNoteWithStyls = parse(structuredNote);
   const questionsWithStyles = parse(questions);
   const summaryWithStyles = parse(summary);
@@ -32,7 +32,6 @@ function NoteContainer({ structuredNote, summary, questions }) {
   );
 }
 
-// Props validation
 NoteContainer.propTypes = {
   structuredNote: PropTypes.string.isRequired,
   summary: PropTypes.string.isRequired,
