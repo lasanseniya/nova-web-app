@@ -10,7 +10,7 @@ const {
   loginUser,
   getUserProfile,
   logoutuser,
-} = require(""); //add auth controller path
+} = require("../controllers/authController");
 
 // Middleware for router
 router.use(
