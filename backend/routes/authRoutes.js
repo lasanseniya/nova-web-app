@@ -7,9 +7,9 @@ const cors = require("cors");
 
 const {
   registerUser,
-  loginUser,
-  getUserProfile,
-  logoutuser,
+  // loginUser,
+  // getUserProfile,
+  // logoutuser,
 } = require("../controllers/authController");
 
 // Middleware for router
