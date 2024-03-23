@@ -100,6 +100,20 @@ const logoutuser = (req, res) => {
   }
 };
 
+// Get user profile
+const getUserProfile = (req, res) => {
+  const { token } = req.cookies;
 
-module.exports = { registerUser, loginUser, logoutuser };
+  if (token) {
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, {}, (err, user) => {
+      if (err) throw err;
+      res.json(user);
+    });
+  } else {
+    res.json({ error: "No token found" });
+  }
+};
+
+
+module.exports = { registerUser, loginUser, logoutuser, getUserProfile };
 
