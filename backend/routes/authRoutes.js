@@ -9,7 +9,7 @@ const {
   registerUser,
   loginUser,
   // getUserProfile,
-  // logoutuser,
+  logoutuser,
 } = require("../controllers/authController");
 
 // Middleware for router
@@ -29,7 +29,7 @@ router.post("/login", loginUser);
 // // endpoint: GET /profile
 // router.get("/profile", getUserProfile);
 
-// // endpoint: POST /logout
-// router.post("/logout", logoutuser);
+// endpoint: POST /logout
+router.post("/logout", logoutuser);
 
 module.exports = router;
