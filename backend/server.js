@@ -28,6 +28,8 @@ app.use(
 );
 
 // Middleware for parsing JSON payloads
+
+app.use(cookieParser());
 app.use(express.json());
 
 // Define different instances of express.Router() for different route sets
