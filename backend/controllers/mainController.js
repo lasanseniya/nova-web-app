@@ -17,7 +17,6 @@ const createTranscript = async (req, res) => {
     });
 };
 
-
 async function query(data) {
   const response = await fetch(
     "https://api-inference.huggingface.co/models/Falconsai/text_summarization",
@@ -49,6 +48,9 @@ const createSummary = async (req, res) => {
   } catch (error) {
     console.error("Error performing summarization:", error);
     res.status(500).json({ error: "Error performing summarization" });
+
+
+    createSummary(req, res);
   }
 };
 

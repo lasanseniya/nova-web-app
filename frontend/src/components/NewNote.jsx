@@ -3,7 +3,7 @@ import NoteContainer from "./NoteContainer";
 import axios from "axios";
 
 // LLM Model const variables
-const API_KEY = import.meta.env.VITE_OPEN_API_KEY;
+const API_KEY = import.meta.env.VITE_API_KEY;
 const systemMessage = {
   role: "system",
   content:

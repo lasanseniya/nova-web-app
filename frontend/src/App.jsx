@@ -23,12 +23,12 @@ const routes = createBrowserRouter(
       <Route index element={<Home />} />,
       <Route path="/login" element={<LoginPage />} />,
       <Route path="/register" element={<RegisterPage />} />,
-      <Route element={<ProtectedRoutes />}>
+      {/* <Route element={<ProtectedRoutes />}> */}
         <Route path="/dashboard" element={<WebBase />}>
           <Route index element={<NewNote />} />,
           <Route path="my-notes" element={<MyNotes />} />,
         </Route>
-      </Route>
+      {/* </Route> */}
       <Route path="/error" element={<Error401 />} />,
     </Route>,
   ),
