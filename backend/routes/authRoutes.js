@@ -16,20 +16,20 @@ const {
 router.use(
   cors({
     credentials: true,
-    origin: "http://localhost:5173",
+    origin: "http://localhost:3003",
   })
 );
 
 // endpoint: POST /register
 router.post("/register", registerUser);
 
-// endpoint: POST /login
-router.post("/login", loginUser);
+// // endpoint: POST /login
+// router.post("/login", loginUser);
 
-// endpoint: GET /profile
-router.get("/profile", getUserProfile);
+// // endpoint: GET /profile
+// router.get("/profile", getUserProfile);
 
-// endpoint: POST /logout
-router.post("/logout", logoutuser);
+// // endpoint: POST /logout
+// router.post("/logout", logoutuser);
 
 module.exports = router;
