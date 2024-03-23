@@ -18,9 +18,9 @@ function LoginPage() {
 
           <div className="mt-5 flex items-center justify-between">
             <span className="border-b w-1/5 lg:w-1/4"></span>
-            <a href="#" className="text-xs text-center text-gray-500 uppercase">
+            <p className="text-xs text-center text-gray-500 uppercase">
               OR
-            </a>
+            </p>
             <span className="border-b w-1/5 lg:w-1/4"></span>
           </div>
 
@@ -55,7 +55,7 @@ function LoginPage() {
           </button>
 
           <div className="text-xs flex justify-center items-center mt-7 w-full">
-            <p className="px-3 mb-6">Don`t have an account? Register</p>
+            <p className="px-3 mb-6"><a href='/register'>Don`t have an account? Register</a></p>
           </div>
         </div>
       </div>

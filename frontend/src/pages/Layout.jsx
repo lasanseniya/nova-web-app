@@ -1,10 +1,13 @@
-import React from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 
 function Layout() {
   return (
-    <Outlet/>
-  )
+    <>
+      <Outlet />
+      <Toaster position="bottom-right" toastOptions={{ duration: 2000 }} />
+    </>
+  );
 }
 
 export default Layout;

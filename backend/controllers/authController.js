@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
-const { hashPassword } = require("../helpers/auth");
+const { hashPassword, comparePassword } = require("../helpers/auth");
+const jwt = require("jsonwebtoken");
 
 /**
  * @desc   Register a new user
@@ -20,7 +21,7 @@ const registerUser = asyncHandler(async (req, res) => {
     return res.json({ error: "Email is required" });
   }
 
-  // Validate email
+  // Validate email via checking if it's already in DB
   const isEmailExist = await User.findOne({ email });
 
   if (isEmailExist) {
@@ -52,4 +53,67 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { registerUser };
+
+/**
+ * @desc   Login user
+ * @route  POST /login
+ * @access Public
+ */
+const loginUser = asyncHandler(async(req, res) => {
+  const {email, password} = req.body;
+
+  // Check whether the user exists
+  const user = await User.findOne({email});
+
+  if (!user){
+    return res.json({error: "User not found!"});
+  }
+
+  // Check whether the password is correct
+  const isPasswordMatch = await comparePassword(password, user.password);
+
+  if (isPasswordMatch) {
+    // Create a json web token
+    jwt.sign(
+      {email: user.email, id: user._id,username: user.username},
+      process.env.ACCESS_TOKEN_SECRET, {}, (err, token) => {
+        if (err) throw err;
+
+        // Send the token inside a cookie
+        res.cookie("token", token).json(user);
+      }
+    );
+  } else {
+    res.json ({error: "Invalid Password!"});
+  }
+});
+
+// Logout user
+const logoutuser = (req, res) => {
+  // Clear the cookie
+  const { token } = req.cookies;
+
+  if (token) {
+    res.clearCookie("token").json({ message: "Logged out" });
+  } else {
+    res.json({ error: "Not logged in" });
+  }
+};
+
+// Get user profile
+const getUserProfile = (req, res) => {
+  const { token } = req.cookies;
+
+  if (token) {
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, {}, (err, user) => {
+      if (err) throw err;
+      res.json(user);
+    });
+  } else {
+    res.json({ error: "No token found" });
+  }
+};
+
+
+module.exports = { registerUser, loginUser, logoutuser, getUserProfile };
+

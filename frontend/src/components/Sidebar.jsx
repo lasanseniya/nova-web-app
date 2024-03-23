@@ -3,9 +3,19 @@ import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { VscAdd } from "react-icons/vsc";
 import { TfiFiles } from "react-icons/tfi";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Sidebar() {
   const [isVisible, setIsVisible] = useState(false);
+  const navigate = useNavigate()
+
+  const handleLogout =() => {
+    axios.post("/logout");
+    localStorage.removeItem("user");
+    navigate("/login");
+  }
+
   return (
     <aside
       id="logo-sidebar"
@@ -40,6 +50,9 @@ function Sidebar() {
             </Link>
           </li>
         </ul>
+        <button onClick={handleLogout} className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+  Logout
+</button>
       </div>
 
       <div
