@@ -7,7 +7,7 @@ const cors = require("cors");
 
 const {
   registerUser,
-  // loginUser,
+  loginUser,
   // getUserProfile,
   // logoutuser,
 } = require("../controllers/authController");
@@ -23,8 +23,8 @@ router.use(
 // endpoint: POST /register
 router.post("/register", registerUser);
 
-// // endpoint: POST /login
-// router.post("/login", loginUser);
+// endpoint: POST /login
+router.post("/login", loginUser);
 
 // // endpoint: GET /profile
 // router.get("/profile", getUserProfile);

@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
-const { hashPassword } = require("../helpers/auth");
+const { hashPassword, comparePassword } = require("../helpers/auth");
+const jwt = require("jsonwebtoken");
 
 /**
  * @desc   Register a new user
@@ -52,4 +53,40 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-module.exports = { registerUser };
+
+/**
+ * @desc   Login user
+ * @route  POST /login
+ * @access Public
+ */
+const loginUser = asyncHandler(async(req, res) => {
+  const {email, password} = req.body;
+
+  // Check whether the user exists
+  const user = await User.findOne({email});
+
+  if (!user){
+    return res.json({error: "User not found!"});
+  }
+
+  // Check whether the password is correct
+  const isPasswordMatch = await comparePassword(password, user.password);
+
+  if (isPasswordMatch) {
+    // Create a json web token
+    jwt.sign(
+      {email: user.email, id: user._id,username: user.username},
+      process.env.ACCESS_TOKEN_SECRET, {}, (err, token) => {
+        if (err) throw err;
+
+        // Send the token inside a cookie
+        res.cookie("token", token).json(user);
+      }
+    );
+  } else {
+    res.json ({error: "Invalid Password!"});
+  }
+});
+
+
+module.exports = { registerUser, loginUser };
