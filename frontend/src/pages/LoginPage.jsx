@@ -4,7 +4,7 @@ import ImageCard from '../components/forms/ImageCard';
 
 function LoginPage() {
   return (
-    <div className="flex py-16 bg-gradient-to-b from-slate-900 via-indigo-900 to-slate-900 h-screen justify-center items-center">
+    <div className="flex py-16 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#2a4472] via-[#031f54] to-[#000714] h-screen justify-center items-center">
       <div className="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
 
           <ImageCard></ImageCard>
