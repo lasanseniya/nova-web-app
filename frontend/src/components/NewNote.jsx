@@ -36,7 +36,6 @@ function NewNote() {
         .then((res) => {
           strucutreTranscriptWithLlm(res.data);
 
-          console.log(res.data + "-------------------end of transcriptiom");
         })
         .catch((err) => console.log(err));
     }
@@ -72,7 +71,6 @@ function NewNote() {
     const jsonData = await data.json();
 
     // Update the structuredNoteWithQs variables with the response from ChatGPT
-    console.log(jsonData.choices[0].message.content);
     setStructuredNoteWithQ(jsonData.choices[0].message.content);
   }
 
