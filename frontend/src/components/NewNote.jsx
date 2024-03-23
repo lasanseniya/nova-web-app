@@ -7,7 +7,7 @@ const API_KEY = import.meta.env.VITE_API_KEY;
 const systemMessage = {
   role: "system",
   content:
-    "Structure the note into three sections. The first section is about questions about the note, and the second section is about structuring the note into a proper study note (by considering the relevant information and its context). Structure the note with html tags to style the note with headings, bullet points, and paragraphs. Give the first section under the 'Questions From Note' topic, make questions from the note, and stick them into the note itself. add 🤔 emoji before each question. add two br tags after each question. Give the second section under 'Structured Note' topic and structure note in the most understandable way with a proper heading for the topic in h2 or h3 and use Bold tag for sure. use br tags for propoer spacing. Third is section name as 'Unstyled Note' and do not add h2 or h3 tag to 'Unstyled Note' topic. In third section include the same note without html tags.",
+    "Structure the note into three sections. The first section is about questions about the note, and the second section is about structuring the note into a proper study note (by considering the relevant information and its context). Structure the note with html tags to style the note with headings, bullet points, and paragraphs. Give the first section under the 'Questions From Note' topic, make questions from the note, and stick them into the note itself. add 🤔 emoji before each question. add two br tags after each question. Give the second section under 'Structured Note' topic and structure note in the most understandable way with a proper heading for the topic in h2 or h3 and use Bold tag for sure. use br tags for propoer spacing. Third is section name as 'Summary Note'. In third section include the summary of whole note.",
 };
 
 const isValidYouTubeUrl = (url) => {
@@ -81,27 +81,27 @@ function NewNote() {
     if (
       structuredNoteWithQs &&
       structuredNoteWithQs.includes("Structured Note") &&
-      structuredNoteWithQs.includes("Unstyled Note")
+      structuredNoteWithQs.includes("Summary Note")
     ) {
       // Extract the structured note
       const structuredNote = structuredNoteWithQs
         .split("Structured Note")[1]
-        .split("Unstyled Note")[0]
+        .split("Summary Note")[0]
         .trim();
       setStructuredNote(structuredNote); // Set structured note variable
       // Send the structured note to the backend to generate summary
-      const noteToSummarize = structuredNoteWithQs.split("Unstyled Note")[1];
-      axios
-        .post("http://localhost:3000/api/create-summary", {
-          noteToSummarize: noteToSummarize,
-        })
-        .then((response) => {
-          setNoteSummary(response.data.summary);
-          // console.log("Summary :" +noteSummary);
-        })
-        .catch((error) => {
-          console.error("Error generating summary:", error);
-        });
+      setNoteSummary(structuredNoteWithQs.split("Summary Note")[1]);
+      // axios
+      //   .post("http://localhost:3000/api/create-summary", {
+      //     noteToSummarize: noteToSummarize,
+      //   })
+      //   .then((response) => {
+      //     setNoteSummary(response.data.summary);
+      //     // console.log("Summary :" +noteSummary);
+      //   })
+      //   .catch((error) => {
+      //     console.error("Error generating summary:", error);
+      //   });
 
       //split the qustions part from structuredNoteWithQs
       if (!questions && structuredNoteWithQs.includes("Questions From Note")) {
@@ -121,10 +121,10 @@ function NewNote() {
       {/* New note container */}
       <div className="mt-20 h-[calc(100vh-5rem)] bg-gradient-to-b from-slate-900 via-slate-900 to-sky-950 p-4 text-white">
         {/* Container */}
-        <div className="flex h-full flex-col">
+        <div className="flex flex-col h-full">
           {/*Youtube link and Generate button container*/}
           <div className="flex place-content-center">
-            <div className="relative w-full flex-col rounded-lg bg-slate-100 p-2 sm:w-4/5 lg:w-2/5">
+            <div className="relative flex-col w-full p-2 rounded-lg bg-slate-100 sm:w-4/5 lg:w-2/5">
               <input
                 type="text"
                 placeholder="YouTube link goes here..."

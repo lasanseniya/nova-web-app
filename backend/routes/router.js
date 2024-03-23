@@ -7,6 +7,6 @@ const {
 } = require("../controllers/mainController");
 
 router.post("/create-transcript", asyncHandler(createTranscript));
-router.post("/create-summary", asyncHandler(createSummary));
+// router.post("/create-summary", asyncHandler(createSummary));
 
 module.exports = { router };
