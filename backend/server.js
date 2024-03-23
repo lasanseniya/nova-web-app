@@ -19,7 +19,6 @@ connectDB(); // Connect to mongo db database
 
 const app = express(); // Initialize express app
 
-// Middleware for parsing cookies
 app.use(
   cors({
     origin: "http://localhost:3003", // URL of the frontend app
@@ -28,9 +27,10 @@ app.use(
 );
 
 // Middleware for parsing JSON payloads
-
-app.use(cookieParser());
 app.use(express.json());
+
+// Middleware for parsing cookies
+app.use(cookieParser());
 
 // Define different instances of express.Router() for different route sets
 const gptRouterInstance = express.Router();
