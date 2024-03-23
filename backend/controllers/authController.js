@@ -20,7 +20,7 @@ const registerUser = asyncHandler(async (req, res) => {
     return res.json({ error: "Email is required" });
   }
 
-  // Validate email
+  // Validate email via checking if it's already in DB
   const isEmailExist = await User.findOne({ email });
 
   if (isEmailExist) {
