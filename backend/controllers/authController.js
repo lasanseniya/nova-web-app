@@ -88,5 +88,18 @@ const loginUser = asyncHandler(async(req, res) => {
   }
 });
 
+// Logout user
+const logoutuser = (req, res) => {
+  // Clear the cookie
+  const { token } = req.cookies;
 
-module.exports = { registerUser, loginUser };
+  if (token) {
+    res.clearCookie("token").json({ message: "Logged out" });
+  } else {
+    res.json({ error: "Not logged in" });
+  }
+};
+
+
+module.exports = { registerUser, loginUser, logoutuser };
+
