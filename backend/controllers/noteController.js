@@ -66,14 +66,16 @@ const createNote = asyncHandler(async (req, res) => {
 //@access private
 const deleteNote = asyncHandler(async (req, res) => {
   const note = await Note.findById(req.params.id);
-  if (!note) {  
-    res.json({error:"Note not found"});
+  if (!note) {
+    res.json({ error: "Note not found" });
   }
-  if (note.user_id && note.user_id.toString() !== req.user.id) {    
-    res.json({error:"User don't have permission to update other user notes"});
+  if (note.user_id && note.user_id.toString() !== req.user.id) {
+    res.json({
+      error: "User don't have permission to update other user notes",
+    });
   }
   await Note.deleteOne({ _id: req.params.id });
   res.json(note);
 });
 
-module.exports = { getNotes, createNote , deleteNote};
+module.exports = { getNotes, createNote };
