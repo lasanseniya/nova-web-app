@@ -12,7 +12,7 @@ const {
   // getNoteById,
   createNote,
   // updateNote,
-  // deleteNote,
+  deleteNote,
 } = require("../controllers/noteController");
 
 // Middleware for router
@@ -37,7 +37,7 @@ router.post("/", createNote);
 // endpoint: PUT / update note
 // router.put("/:id", updateNote);
 
-// endpoint: DELETE / delete note
-// router.delete("/:id", deleteNote);
+//endpoint: DELETE / delete note
+router.delete("/:id", deleteNote);
 
 module.exports = router;
