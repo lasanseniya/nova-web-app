@@ -53,20 +53,19 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-
 /**
  * @desc   Login user
  * @route  POST /login
  * @access Public
  */
-const loginUser = asyncHandler(async(req, res) => {
-  const {email, password} = req.body;
+const loginUser = asyncHandler(async (req, res) => {
+  const { email, password } = req.body;
 
   // Check whether the user exists
-  const user = await User.findOne({email});
+  const user = await User.findOne({ email });
 
-  if (!user){
-    return res.json({error: "User not found!"});
+  if (!user) {
+    return res.json({ error: "User not found!" });
   }
 
   // Check whether the password is correct
@@ -74,23 +73,23 @@ const loginUser = asyncHandler(async(req, res) => {
 
   if (isPasswordMatch) {
     // Create a json web token
-    const token = jwt.sign({
-      user: {
-        username: user.username,
-        email: user.email,
-        id: user.id
+    const token = jwt.sign(
+      {
+        user: {
+          username: user.username,
+          email: user.email,
+          id: user.id,
+        },
       },
-    },
-    process.env.ACCESS_TOKEN_SECRET
+      process.env.ACCESS_TOKEN_SECRET
     );
 
     // Send the jwt token inside a cookie
-    res.cookie("token", token).json({token})
+    res.cookie("token", token).json({ token });
   } else {
-    res.json ({error: "Invalid Password!"});
+    res.json({ error: "Invalid Password!" });
   }
 });
-
 
 // Logout user
 const logoutuser = (req, res) => {
@@ -103,7 +102,6 @@ const logoutuser = (req, res) => {
     res.json({ error: "Not logged in" });
   }
 };
-
 
 // Get user profile
 const getUserProfile = (req, res) => {
@@ -119,6 +117,4 @@ const getUserProfile = (req, res) => {
   }
 };
 
-
 module.exports = { registerUser, loginUser, logoutuser, getUserProfile };
-
