@@ -78,4 +78,4 @@ const deleteNote = asyncHandler(async (req, res) => {
   res.json(note);
 });
 
-module.exports = { getNotes, createNote };
+module.exports = { getNotes, createNote, deleteNote };
