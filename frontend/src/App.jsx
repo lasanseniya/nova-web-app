@@ -25,26 +25,29 @@ axios.defaults.withCredentials = true;
 
 const routes = createBrowserRouter(
   createRoutesFromElements(
-    // <UserContextProvider>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />,
-        <Route path="/login" element={<LoginPage />} />,
-        <Route path="/register" element={<RegisterPage />} />,
-        <Route element={<ProtectedRoutes />}>
-          <Route path="/dashboard" element={<WebBase />}>
-            <Route index element={<NewNote />} />,
-            <Route path="my-notes" element={<MyNotes />} />,
-          </Route>
+    <Route path="/" element={<Layout />}>
+      <Route index element={<Home />} />,
+      <Route path="/login" element={<LoginPage />} />,
+      <Route path="/register" element={<RegisterPage />} />,
+      <Route element={<ProtectedRoutes />}>
+        <Route path="/dashboard" element={<WebBase />}>
+          <Route index element={<NewNote />} />,
+          <Route path="my-notes" element={<MyNotes />} />,
         </Route>
-        <Route path="/error" element={<Error401 />} />,
       </Route>
-      ,
-    // </UserContextProvider>,
+      <Route path="/error" element={<Error401 />} />,
+    </Route>,
   ),
 );
 
 function App() {
-  return <RouterProvider router={routes} />;
+  return (
+    <>
+      <UserContextProvider>
+        <RouterProvider router={routes} />
+      </UserContextProvider>
+    </>
+  );
 }
 
 export default App;
