@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 function MyNotes() {
-  const [activeTab, setActiveTab] = useState("styled-profile");
+  const [activeTab, setActiveTab] = useState("styled-home");
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
   };
@@ -79,7 +79,7 @@ function MyNotes() {
                 aria-labelledby="home-tab"
               >
                 <strong className="font-medium text-gray-800 dark:text-white">
-                <div className="w-full h-[calc(88vh-5rem)] bg-white mx-auto pr-10 pl-10 p-3 rounded-lg overflow-scroll">
+                <div className="w-full h-[550px] bg-white mx-auto pr-10 pl-10 p-3 rounded-lg overflow-scroll">
             <div className="flex justify-end items-center">
               <span className="mr-4">{}</span>
               <button className="bg-slate-300 hover:bg-slate-400 text-black font-bold py-2 px-4 rounded focus:outline-none w-800" onClick={handleButtonClick}>Create New Note</button>
@@ -102,7 +102,9 @@ function MyNotes() {
                 </button>
               </div>
             ))}
-</div>
+            </div>
+
+
                 </strong>
               </div>
               <div
