@@ -5,35 +5,39 @@ const router = express.Router();
 
 const cors = require("cors");
 
+const validateToken = require("../middleware/validateToken");
+
 const {
-    getNotes,
-    getNoteById,
-    createNote,
-    updateNote,
-    deleteNote,
+  getNotes,
+  // getNoteById,
+  createNote,
+  // updateNote,
+  // deleteNote,
 } = require("../controllers/noteController");
 
 // Middleware for router
 router.use(
-    cors({
-      credentials: true,
-      origin: "http://localhost:3003",
-    })
-);  
+  cors({
+    credentials: true,
+    origin: "http://localhost:3003",
+  })
+);
+
+router.use(validateToken);
 
 // endpoint: GET / retrieve notes
 router.get("/", getNotes);
 
 // endpoint: GET / get note by id
-router.get("/:id", getNoteById);
+// router.get("/:id", getNoteById);
 
 // endpoint: POST / create note
 router.post("/", createNote);
 
 // endpoint: PUT / update note
-router.put("/:id", updateNote);
+// router.put("/:id", updateNote);
 
 // endpoint: DELETE / delete note
-router.delete("/:id", deleteNote);
+// router.delete("/:id", deleteNote);
 
 module.exports = router;

@@ -5,6 +5,8 @@ const router = express.Router();
 
 const cors = require("cors");
 
+const validateToken = require("../middleware/validateToken");
+
 const {
   registerUser,
   loginUser,
@@ -27,7 +29,7 @@ router.post("/register", registerUser);
 router.post("/login", loginUser);
 
 // endpoint: GET /profile
-router.get("/profile", getUserProfile);
+router.get("/profile", validateToken, getUserProfile);
 
 // endpoint: POST /logout
 router.post("/logout", logoutuser);
