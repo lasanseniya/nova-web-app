@@ -56,7 +56,7 @@ function Sidebar() {
         </ul>
         <button
           onClick={handleLogout}
-          className="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-blue-700 hover:border-transparent hover:bg-blue-500 hover:text-white"
+          className="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-gray-700 hover:text-white absolute bottom-[25px] right-[90px]"
         >
           Logout
         </button>
