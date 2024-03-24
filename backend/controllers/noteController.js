@@ -19,27 +19,45 @@ const getNotes = asyncHandler(async (req, res) => {
 const createNote = asyncHandler(async (req, res) => {
   const { title, structuredNote, summary, cueQuestions } = req.body;
 
-  if (!title) {
-    // assign a default title with count of notes
-    title = "unknown";
-  }
+  // Set default title if not provided by the user or if it's empty
+  const defaultTitle = title
+    ? title
+    : `Unknown ${(await Note.countDocuments({ user_id: req.user.id })) + 1}`;
 
   const isTitleExist = await Note.findOne({ title, user_id: req.user.id });
 
   if (isTitleExist) {
-    return res.json({ error: "Note title already exists" });
+    // Send an error message if the note title already exists
+    return res.json({ error: "Note title already exists 😑" });
+  }
+
+  // Check if the user has provided all the required fields
+  if (!structuredNote) {
+    return res.json({ error: "Structured note is empty" });
+  }
+
+  if (!summary) {
+    return res.json({ error: "Summary is empty" });
+  }
+
+  if (!cueQuestions) {
+    return res.json({ error: "Cue questions are empty" });
   }
 
   // Create a new note
   const note = await Note.create({
     user_id: req.user.id,
-    title,
+    title: defaultTitle,
     structuredNote,
     summary,
     cueQuestions,
   });
 
-  res.json(note);
+  if (!note) {
+    res.json({ error: "Note creation failed ❌" });
+  }
+
+  res.json({ message: "Note saved! 🫡" });
 });
 
 module.exports = { getNotes, createNote };
