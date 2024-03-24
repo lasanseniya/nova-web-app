@@ -74,19 +74,23 @@ const loginUser = asyncHandler(async(req, res) => {
 
   if (isPasswordMatch) {
     // Create a json web token
-    jwt.sign(
-      {email: user.email, id: user._id,username: user.username},
-      process.env.ACCESS_TOKEN_SECRET, {}, (err, token) => {
-        if (err) throw err;
-
-        // Send the token inside a cookie
-        res.cookie("token", token).json(user);
-      }
+    const token = jwt.sign({
+      user: {
+        username: user.username,
+        email: user.email,
+        id: user.id
+      },
+    },
+    process.env.ACCESS_TOKEN_SECRET
     );
+
+    // Send the jwt token inside a cookie
+    res.cookie("token", token).json({token})
   } else {
     res.json ({error: "Invalid Password!"});
   }
 });
+
 
 // Logout user
 const logoutuser = (req, res) => {
@@ -99,6 +103,7 @@ const logoutuser = (req, res) => {
     res.json({ error: "Not logged in" });
   }
 };
+
 
 // Get user profile
 const getUserProfile = (req, res) => {
