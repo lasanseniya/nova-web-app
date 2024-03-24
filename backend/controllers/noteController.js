@@ -60,4 +60,27 @@ const createNote = asyncHandler(async (req, res) => {
   res.json({ message: "Note saved! 🫡" });
 });
 
-module.exports = { getNotes, createNote };
+
+/** 
+@desc Update Note
+@route PUT /api/contacts/:id
+@access private
+*/
+const updateNote = asyncHandler(async (req, res) => {
+  const note = await Note.findById(req.params.id);
+  if (!note) {
+    return res.json({error:"Note is not found 😑"});
+  }
+
+  const updatedNote = await Note.findByIdAndUpdate(
+    req.params.id,
+    req.body,
+    { new: true }
+  );
+
+  res.json(updatedNote);
+});
+
+module.exports = { getNotes, createNote, updateNote };
+
+
