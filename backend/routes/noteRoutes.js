@@ -11,7 +11,7 @@ const {
   getNotes,
   // getNoteById,
   createNote,
-  // updateNote,
+  updateNote,
   deleteNote,
 } = require("../controllers/noteController");
 
@@ -35,7 +35,7 @@ router.get("/", getNotes);
 router.post("/", createNote);
 
 // endpoint: PUT / update note
-// router.put("/:id", updateNote);
+router.put("/:id", updateNote);
 
 //endpoint: DELETE / delete note
 router.delete("/:id", deleteNote);
