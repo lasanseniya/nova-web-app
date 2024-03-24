@@ -3,8 +3,9 @@ const mongoose = require("mongoose"); // Import mongoose to create a schema
 // Create a schema for the user
 const notesSchema = new mongoose.Schema(
   {
-    userId:{
+    user_id:{
         type: mongoose.Schema.Types.ObjectId,
+        required: true,
         ref: "UserModel"
     },
     title: {
