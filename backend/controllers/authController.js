@@ -86,6 +86,9 @@ const loginUser = asyncHandler(async (req, res) => {
 
     // Send the jwt token inside a cookie
     res.cookie("token", token).json({ token });
+
+    // store the jwt on local storage
+    localStorage.setItem("token", token);
   } else {
     res.json({ error: "Invalid Password!" });
   }
@@ -96,7 +99,10 @@ const logoutuser = (req, res) => {
   // Clear the cookie
   const { token } = req.cookies;
 
-  if (token) {
+  // Check if token exists on local storage
+  if (localStorage.getItem("token")) {
+    localStorage.removeItem("token");
+  } else if (token) {
     res.clearCookie("token").json({ message: "Logged out" });
   } else {
     res.json({ error: "Not logged in" });
@@ -107,7 +113,17 @@ const logoutuser = (req, res) => {
 const getUserProfile = (req, res) => {
   const { token } = req.cookies;
 
-  if (token) {
+  if (localStorage.getItem("token")) {
+    jwt.verify(
+      localStorage.getItem("token"),
+      process.env.ACCESS_TOKEN_SECRET,
+      {},
+      (err, user) => {
+        if (err) throw err;
+        res.json(user);
+      }
+    );
+  } else if (token) {
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, {}, (err, user) => {
       if (err) throw err;
       res.json(user);

@@ -16,6 +16,11 @@ const validateToken = asyncHandler(async (req, res, next) => {
     token = req.cookies.token;
   }
 
+  // If token is not found in headers or cookies, try local storage
+  if (!token && localStorage.getItem("token")) {
+    token = localStorage.getItem("token");
+  }
+
   // Verify token if found
   if (token) {
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
