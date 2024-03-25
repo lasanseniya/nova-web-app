@@ -2,7 +2,6 @@ const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 const { hashPassword, comparePassword } = require("../helpers/auth");
 const jwt = require("jsonwebtoken");
-const localStorage = require("node-localstorage");
 
 /**
  * @desc   Register a new user
@@ -89,7 +88,7 @@ const loginUser = asyncHandler(async (req, res) => {
     res.cookie("token", token).json({ token });
 
     // store the jwt on local storage
-    localStorage.setItem("token", token);
+    window.localStorage.setItem("token", token);
   } else {
     res.json({ error: "Invalid Password!" });
   }
@@ -101,8 +100,8 @@ const logoutuser = (req, res) => {
   const { token } = req.cookies;
 
   // Check if token exists on local storage
-  if (localStorage.getItem("token")) {
-    localStorage.removeItem("token");
+  if (window.localStorage.getItem("token")) {
+    window.localStorage.removeItem("token");
   } else if (token) {
     res.clearCookie("token").json({ message: "Logged out" });
   } else {
@@ -115,9 +114,9 @@ const getUserProfile = (req, res) => {
   const { token } = req.cookies;
 
   // Check if token exists on local storage
-  if (localStorage.getItem("token")) {
+  if (window.localStorage.getItem("token")) {
     jwt.verify(
-      localStorage.getItem("token"),
+      window.localStorage.getItem("token"),
       process.env.ACCESS_TOKEN_SECRET,
       {},
       (err, user) => {

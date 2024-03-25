@@ -1,6 +1,5 @@
 const asyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
-const localStorage = require("node-localstorage");
 
 const validateToken = asyncHandler(async (req, res, next) => {
   let token;
@@ -18,8 +17,8 @@ const validateToken = asyncHandler(async (req, res, next) => {
   }
 
   // If token is not found in headers or cookies, try local storage
-  if (!token && localStorage.getItem("token")) {
-    token = localStorage.getItem("token");
+  if (!token && window.localStorage.getItem("token")) {
+    token = window.localStorage.getItem("token");
   }
 
   // Verify token if found
