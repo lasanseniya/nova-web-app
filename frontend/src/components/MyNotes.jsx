@@ -2,10 +2,16 @@ import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
 import { toast } from "react-hot-toast";
-import NoteContainer from "./NoteContainer";
+// import NoteContainer from "./NoteContainer";
+import NoteViewer from "./NoteViewer";
 
 function MyNotes() {
   const [activeTab, setActiveTab] = useState("styled-home");
+  const [structuredNote, setStructuredNote] = useState("");
+  const [cueQuestions, setCueQuestions] = useState("");
+  const [summary, setSummary] = useState("");
+  const [selectedNoteId, setSelectedNoteId] = useState("");
+  const [title, setTitle] = useState("");
   const handleTabClick = (tabId) => {
     setActiveTab(tabId);
   };
@@ -41,18 +47,23 @@ function MyNotes() {
     }
   };
 
-  const handleNameClick = (buttonId) => {
+  const handleNameClick = (buttonId, structuredNote, cueQuestions, summary, title) => {
     setActiveTab("styled-tab");
+    setStructuredNote(structuredNote);
+    setCueQuestions(cueQuestions);
+    setSummary(summary);
+    setSelectedNoteId(buttonId);
+    setTitle(title)
     console.log(`Clicked button name with ID: ${buttonId}`);
   };
 
   return (
     <div className="sm:ml-64">
       <div className="mt-20 h-[calc(100vh-5rem)] bg-gradient-to-b from-slate-900 via-slate-900 to-sky-950 p-4 text-white dark:border-gray-700">
-        <div className="h-full flex-row overflow-y-scroll">
+        <div className="flex-row h-full overflow-y-scroll">
           <div className="mb-4 border-b border-gray-200 dark:border-gray-700">
             <ul
-              className="-mb-px flex flex-wrap text-center text-sm font-medium"
+              className="flex flex-wrap -mb-px text-sm font-medium text-center"
               id="default-styled-tab"
               role="tablist"
             >
@@ -85,7 +96,7 @@ function MyNotes() {
                   role="tab"
                   aria-controls="Tab"
                   aria-selected={activeTab === "styled-tab"}
-                  onClick={() => handleTabClick("styled-tab")}
+                  onClick={() => handleTabClick(note.id)}
                 >
                   Tab
                 </button>
@@ -107,12 +118,20 @@ function MyNotes() {
                       .map((note) => (
                         // Note pill holding relevant information of each note
                         <div
-                          className="mb-5 flex w-full items-center justify-between rounded bg-slate-100 px-4 py-2 text-black shadow-md focus:outline-none"
+                          className="flex items-center justify-between w-full px-4 py-2 mb-5 text-black rounded shadow-md bg-slate-100 focus:outline-none"
                           key={note._id}
                         >
                           <button
-                            className="w-full rounded bg-slate-100 px-2 py-1 text-xs text-black hover:bg-slate-200 focus:outline-none lg:text-base"
-                            onClick={() => handleNameClick(note.id)}
+                            className="w-full px-2 py-1 text-xs text-black rounded bg-slate-100 hover:bg-slate-200 focus:outline-none lg:text-base"
+                            onClick={() =>
+                              handleNameClick(
+                                note._id,
+                                note.structuredNote,
+                                note.cueQuestions,
+                                note.summary,
+                                note.title
+                              )
+                            }
                           >
                             <span className="flex flex-col lg:flex-row">
                               <span className="mr-12">{note.createdAt}</span>
@@ -123,7 +142,7 @@ function MyNotes() {
                           </button>
 
                           <button
-                            className="rounded bg-slate-200 px-2 py-1 text-black shadow-md hover:bg-red-100 focus:outline-none"
+                            className="px-2 py-1 text-black rounded shadow-md bg-slate-200 hover:bg-red-100 focus:outline-none"
                             onClick={() => handleDeleteButtonClick(note._id)}
                           >
                             <svg
@@ -132,7 +151,7 @@ function MyNotes() {
                               viewBox="0 0 24 24"
                               strokeWidth="1.5"
                               stroke="currentColor"
-                              className="h-6 w-6"
+                              className="w-6 h-6"
                             >
                               <path
                                 strokeLinecap="round"
@@ -153,7 +172,13 @@ function MyNotes() {
                 aria-labelledby="tab"
               >
                 <strong className="font-medium text-gray-800 dark:text-white"></strong>
-                <NoteContainer />
+                <NoteViewer
+                  structuredNote={structuredNote}
+                  summary={summary}
+                  cueQuestions={cueQuestions}
+                  selectedNoteId={selectedNoteId}
+                  title={title}
+                />
               </div>
             </div>
           </div>
