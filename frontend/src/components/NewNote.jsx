@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import NoteContainer from "./NoteContainer";
 import axios from "axios";
+import { ScaleLoader } from "react-spinners";
+import { toast } from "react-hot-toast";
 
 // LLM Model const variables
 const API_KEY = import.meta.env.VITE_API_KEY;
@@ -23,6 +25,7 @@ function NewNote() {
   const [noteSummary, setNoteSummary] = useState("");
   const [structuredNote, setStructuredNote] = useState("");
   const [questions, setQuestions] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const ytUrlHandler = async () => {
     setNoteSummary("");
@@ -30,14 +33,17 @@ function NewNote() {
     setQuestions("");
     // send url to backend
     if (ytUrl && isValidYouTubeUrl(ytUrl)) {
+      setLoading(true);
       await axios
         .post("http://localhost:3000/api/create-transcript", { zip: ytUrl })
 
         .then((res) => {
           strucutreTranscriptWithLlm(res.data);
-
         })
         .catch((err) => console.log(err));
+    } else {
+      setLoading(false);
+      toast.error("Invalid YouTube URL 😵");
     }
   };
 
@@ -59,6 +65,7 @@ function NewNote() {
     };
 
     // Fetch from ChatGPT
+    setLoading(true);
     const data = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -111,6 +118,11 @@ function NewNote() {
         // console.log("ques :" + questions);
         setQuestions(questions);
       }
+
+      // if all the notes are filled with information set the loading to false
+      if (structuredNote && noteSummary && questions) {
+        setLoading(false);
+      }
     }
   }, [structuredNoteWithQs, noteSummary, questions]);
 
@@ -119,10 +131,10 @@ function NewNote() {
       {/* New note container */}
       <div className="mt-20 h-[calc(100vh-5rem)] bg-gradient-to-b from-slate-900 via-slate-900 to-sky-950 p-4 text-white">
         {/* Container */}
-        <div className="flex flex-col h-full">
+        <div className="flex h-full flex-col">
           {/*Youtube link and Generate button container*/}
           <div className="flex place-content-center">
-            <div className="relative flex-col w-full p-2 rounded-lg bg-slate-100 sm:w-4/5 lg:w-2/5">
+            <div className="relative w-full flex-col rounded-lg bg-slate-100 p-2 sm:w-4/5 lg:w-2/5">
               <input
                 type="text"
                 placeholder="YouTube link goes here..."
@@ -136,6 +148,8 @@ function NewNote() {
                 Generate
               </button>
             </div>
+            {/* display clip loader if loading */}
+            {loading && <ScaleLoader color="#398ece" className="ml-2" />}
           </div>
           {/* Note Containers */}
           <NoteContainer
