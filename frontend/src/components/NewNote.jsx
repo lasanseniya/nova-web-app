@@ -6,6 +6,8 @@ import { toast } from "react-hot-toast";
 
 // LLM Model const variables
 const API_KEY = import.meta.env.VITE_API_KEY;
+const BASE_URL = import.meta.env.VITE_BASE_URL;
+
 const systemMessage = {
   role: "system",
   content:
@@ -35,7 +37,7 @@ function NewNote() {
     if (ytUrl && isValidYouTubeUrl(ytUrl)) {
       setLoading(true);
       await axios
-        .post("http://localhost:3000/api/create-transcript", { zip: ytUrl })
+        .post(`${BASE_URL}/api/create-transcript`, { zip: ytUrl })
 
         .then((res) => {
           strucutreTranscriptWithLlm(res.data);

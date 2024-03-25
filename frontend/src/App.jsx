@@ -19,7 +19,7 @@ import ProtectedRoutes from "./utils/ProtectedRoutes.jsx";
 import axios from "axios";
 import { UserContextProvider } from "../context/userContext.jsx";
 
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
 axios.defaults.withCredentials = true;
 
