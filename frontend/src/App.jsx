@@ -8,7 +8,6 @@ import {
 } from "react-router-dom";
 
 import Layout from "./pages/Layout.jsx";
-import Home from "./pages/Home.jsx";
 import LoginPage from "./pages/LoginPage.jsx";
 import RegisterPage from "./pages/RegisterPage.jsx";
 import WebBase from "./components/WebBase.jsx";
@@ -26,8 +25,7 @@ axios.defaults.withCredentials = true;
 const routes = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<Layout />}>
-      <Route index element={<Home />} />,
-      <Route path="/login" element={<LoginPage />} />,
+      <Route index element={<LoginPage />} />,
       <Route path="/register" element={<RegisterPage />} />,
       <Route element={<ProtectedRoutes />}>
         <Route path="/dashboard" element={<WebBase />}>
