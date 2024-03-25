@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect } from "react"
+import { toast } from "react-hot-toast";
 
 function MyNotes() {
   const [activeTab, setActiveTab] = useState("styled-home");
@@ -23,6 +24,17 @@ function MyNotes() {
 
     fetchNotes(); // Call the function
   }, [buttons]); // Run effect whenever buttons state changes to support dynamic updates on the frontend
+
+
+  const handleDeleteButtonClick = async (deleteButtonId) => {
+    // Delete note with the given ID from the backend
+    try {
+      await axios.delete(`/api/notes/${deleteButtonId}`);
+      toast.success("Note deleted successfully");
+    } catch (error) {
+      console.error("Error deleting note:", error);
+    }
+};
 
   const handleNameClick = (buttonId) => {
     setActiveTab("styled-tab");
@@ -107,8 +119,8 @@ function MyNotes() {
 
                           <button
                             className="rounded bg-slate-200 px-2 py-1 text-black shadow-md hover:bg-red-100 focus:outline-none"
-                            // onClick={}
-                            // TODO: Implement delete functionality via backend endpoint
+                            onClick={() => handleDeleteButtonClick(note._id) } 
+                            
                           >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
