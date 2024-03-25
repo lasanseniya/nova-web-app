@@ -66,28 +66,19 @@ function NoteContainer({ structuredNote = "", summary = "", questions = "" }) {
         </button>
       </div>
       <div className="flex-1 overflow-y-scroll p-6 sm:grid sm:grid-cols-3 sm:grid-rows-10 sm:gap-4">
-        <div
-          contentEditable
-          className="col-span-1 row-span-10 overflow-y-scroll rounded-md border border-dashed bg-[#F5F7F8] p-2 text-slate-900"
-        >
+        <div className="col-span-1 row-span-10 overflow-y-scroll rounded-md border border-dashed bg-[#F5F7F8] p-2 text-slate-900">
           <div className="text-center text-2xl font-bold leading-loose text-slate-900">
             Questions
           </div>
           {questionsWithStyles}
         </div>
-        <div
-          contentEditable
-          className="col-span-2 row-span-7 overflow-y-scroll rounded-md border border-dashed bg-[#F5F7F8] p-2 text-slate-900"
-        >
+        <div className="col-span-2 row-span-7 overflow-y-scroll rounded-md border border-dashed bg-[#F5F7F8] p-2 text-slate-900">
           <div className="text-center text-2xl font-bold leading-loose text-slate-900">
             Structured Note
           </div>
           {structuredNoteWithStyles}
         </div>
-        <div
-          contentEditable
-          className="col-span-2 col-start-2 row-span-3 row-start-8 overflow-y-scroll rounded-md border  border-dashed bg-[#F5F7F8] p-2 text-slate-900"
-        >
+        <div className="col-span-2 col-start-2 row-span-3 row-start-8 overflow-y-scroll rounded-md border  border-dashed bg-[#F5F7F8] p-2 text-slate-900">
           <div className="text-center text-2xl font-bold leading-loose text-slate-900">
             Summary
           </div>
