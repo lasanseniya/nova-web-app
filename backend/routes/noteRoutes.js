@@ -19,7 +19,7 @@ const {
 router.use(
   cors({
     credentials: true,
-    origin: "http://localhost:3003",
+    origin: process.env.FRONTEND_URL,
   })
 );
 

@@ -23,7 +23,7 @@ const app = express(); // Initialize express app
 
 app.use(
   cors({
-    origin: "http://localhost:3003", // URL of the frontend app
+    origin: process.env.FRONTEND_URL, // URL of the frontend app
     credentials: true,
   })
 );

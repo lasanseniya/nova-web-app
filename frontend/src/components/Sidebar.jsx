@@ -17,7 +17,7 @@ function Sidebar() {
     axios.post("/logout");
     localStorage.removeItem("user");
     setUser(null);
-    navigate("/login");
+    navigate("/");
   };
 
   return (
@@ -56,7 +56,7 @@ function Sidebar() {
         </ul>
         <button
           onClick={handleLogout}
-          className="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-gray-700 hover:text-white absolute bottom-[25px] right-[90px]"
+          className="absolute bottom-[25px] right-[90px] rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-gray-700 hover:text-white"
         >
           Logout
         </button>
