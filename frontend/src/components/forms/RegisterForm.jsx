@@ -50,7 +50,7 @@ function RegisterForm() {
       } else {
         setData({});
         toast.success("User registered successfully");
-        navigate("/login");
+        navigate("/");
       }
     } catch (error) {
       console.log(error);
