@@ -86,14 +86,12 @@ const deleteNote = asyncHandler(async (req, res) => {
 const updateNote = asyncHandler(async (req, res) => {
   const note = await Note.findById(req.params.id);
   if (!note) {
-    return res.json({error:"Note is not found 😑"});
+    return res.json({ error: "Note is not found 😑" });
   }
 
-  const updatedNote = await Note.findByIdAndUpdate(
-    req.params.id,
-    req.body,
-    { new: true }
-  );
+  const updatedNote = await Note.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+  });
 
   res.json(updatedNote);
 });

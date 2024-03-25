@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
+const localStorage = require("node-localstorage");
 
 const validateToken = asyncHandler(async (req, res, next) => {
   let token;

@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 const { hashPassword, comparePassword } = require("../helpers/auth");
 const jwt = require("jsonwebtoken");
+const localStorage = require("node-localstorage");
 
 /**
  * @desc   Register a new user
@@ -113,6 +114,7 @@ const logoutuser = (req, res) => {
 const getUserProfile = (req, res) => {
   const { token } = req.cookies;
 
+  // Check if token exists on local storage
   if (localStorage.getItem("token")) {
     jwt.verify(
       localStorage.getItem("token"),
