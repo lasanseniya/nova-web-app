@@ -14,7 +14,6 @@ import WebBase from "./components/WebBase.jsx";
 import NewNote from "./components/NewNote.jsx";
 import MyNotes from "./components/MyNotes.jsx";
 import Error401 from "./pages/Error401.jsx";
-import ProtectedRoutes from "./utils/ProtectedRoutes.jsx";
 import axios from "axios";
 import { UserContextProvider } from "../context/userContext.jsx";
 
@@ -27,11 +26,9 @@ const routes = createBrowserRouter(
     <Route path="/" element={<Layout />}>
       <Route index element={<LoginPage />} />,
       <Route path="/register" element={<RegisterPage />} />,
-      <Route element={<ProtectedRoutes />}>
-        <Route path="/dashboard" element={<WebBase />}>
-          <Route index element={<NewNote />} />,
-          <Route path="my-notes" element={<MyNotes />} />,
-        </Route>
+      <Route path="/dashboard" element={<WebBase />}>
+        <Route index element={<NewNote />} />,
+        <Route path="my-notes" element={<MyNotes />} />,
       </Route>
       <Route path="/error" element={<Error401 />} />,
     </Route>,
