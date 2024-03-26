@@ -5,8 +5,6 @@ const router = express.Router();
 
 const cors = require("cors");
 
-const validateToken = require("../middleware/validateToken");
-
 const {
   getNotes,
   // getNoteById,
@@ -22,8 +20,6 @@ router.use(
     origin: process.env.FRONTEND_URL,
   })
 );
-
-router.use(validateToken);
 
 // endpoint: GET / retrieve notes
 router.get("/", getNotes);
