@@ -17,7 +17,6 @@ import MyNotes from "./components/MyNotes.jsx";
 import Error401 from "./pages/Error401.jsx";
 import ProtectedRoutes from "./utils/ProtectedRoutes.jsx";
 import axios from "axios";
-import { UserContextProvider } from "../context/userContext.jsx";
 
 axios.defaults.baseURL = "http://localhost:3000";
 
@@ -43,9 +42,7 @@ const routes = createBrowserRouter(
 function App() {
   return (
     <>
-      <UserContextProvider>
-        <RouterProvider router={routes} />
-      </UserContextProvider>
+      <RouterProvider router={routes} />
     </>
   );
 }

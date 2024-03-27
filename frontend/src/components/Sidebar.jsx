@@ -1,22 +1,18 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { VscAdd } from "react-icons/vsc";
 import { TfiFiles } from "react-icons/tfi";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../context/userContext";
-import { useContext } from "react";
 
 function Sidebar() {
   const [isVisible, setIsVisible] = useState(false);
-  const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
     axios.post("/logout");
     localStorage.removeItem("user");
-    setUser(null);
     navigate("/login");
   };
 
@@ -56,7 +52,7 @@ function Sidebar() {
         </ul>
         <button
           onClick={handleLogout}
-          className="rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-gray-700 hover:text-white absolute bottom-[25px] right-[90px]"
+          className="absolute bottom-[25px] right-[90px] rounded border border-blue-500 bg-transparent px-4 py-2 font-semibold text-white hover:border-transparent hover:bg-gray-700 hover:text-white"
         >
           Logout
         </button>
