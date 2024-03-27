@@ -6,6 +6,8 @@ import { useState } from "react";
 import axios from "axios";
 import parse from "html-react-parser";
 
+import PropTypes from "prop-types";
+
 function NoteViewer({
   structuredNote,
   cueQuestions,
@@ -28,9 +30,11 @@ function NoteViewer({
   // Function to handle saving the note to mongoDB
   const handleSaveNote = async () => {
     const { data } = await axios.put("/api/notes/" + selectedNoteId + "", {
-      structuredNote: editedStructuredNote ? editedStructuredNote: structuredNote,
-      summary: editedSummary ? editedSummary: summary,
-      cueQuestions: editedcueQuestions ? editedcueQuestions: cueQuestions,
+      structuredNote: editedStructuredNote
+        ? editedStructuredNote
+        : structuredNote,
+      summary: editedSummary ? editedSummary : summary,
+      cueQuestions: editedcueQuestions ? editedcueQuestions : cueQuestions,
       title: editedTitle ? editedTitle : title,
     });
 
@@ -43,11 +47,11 @@ function NoteViewer({
   };
   return (
     <>
-      <div className="flex items-center justify-end mt-3 mr-12">
+      <div className="mr-12 mt-3 flex items-center justify-end">
         <input
           type="text"
           placeholder="Enter note title..."
-          className="p-1 mr-2 text-black rounded-md"
+          className="mr-2 rounded-md p-1 text-black"
           // Set the title value to the input value
           value={editedTitle ? editedTitle : title}
           // Update the title value when the input box's value changes
@@ -62,7 +66,7 @@ function NoteViewer({
           Save Note
         </button>
       </div>
-      <div className="flex-1 p-6 overflow-y-scroll sm:grid sm:grid-cols-3 sm:grid-rows-10 sm:gap-4">
+      <div className="flex-1 overflow-y-scroll p-6 sm:grid sm:grid-cols-3 sm:grid-rows-10 sm:gap-4">
         <div
           contentEditable
           onInput={(e) => {
@@ -70,11 +74,13 @@ function NoteViewer({
           }}
           className="col-span-1 row-span-10 overflow-y-scroll rounded-md border border-dashed bg-[#F5F7F8] p-2 text-slate-900"
         >
-          <div className="text-2xl font-bold leading-loose text-center text-slate-900" contentEditable="false">
+          <div
+            className="text-center text-2xl font-bold leading-loose text-slate-900"
+            contentEditable="false"
+          >
             Questions
           </div>
           {questionsWithStyles}
-        
         </div>
         <div
           contentEditable
@@ -83,11 +89,13 @@ function NoteViewer({
           }}
           className="col-span-2 row-span-7 overflow-y-scroll rounded-md border border-dashed bg-[#F5F7F8] p-2 text-slate-900"
         >
-          <div className="text-2xl font-bold leading-loose text-center text-slate-900" contentEditable="false">
+          <div
+            className="text-center text-2xl font-bold leading-loose text-slate-900"
+            contentEditable="false"
+          >
             Structured Note
           </div>
           {structuredNoteWithStyles}
-       
         </div>
         <div
           contentEditable
@@ -96,15 +104,25 @@ function NoteViewer({
           }}
           className="col-span-2 col-start-2 row-span-3 row-start-8 overflow-y-scroll rounded-md border  border-dashed bg-[#F5F7F8] p-2 text-slate-900"
         >
-          <div className="text-2xl font-bold leading-loose text-center text-slate-900" contentEditable="false">
+          <div
+            className="text-center text-2xl font-bold leading-loose text-slate-900"
+            contentEditable="false"
+          >
             Summary
           </div>
           {summaryWithStyles}
-      
         </div>
       </div>
     </>
   );
 }
+
+NoteViewer.propTypes = {
+  structuredNote: PropTypes.string.isRequired,
+  cueQuestions: PropTypes.string.isRequired,
+  summary: PropTypes.string.isRequired,
+  selectedNoteId: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+};
 
 export default NoteViewer;
