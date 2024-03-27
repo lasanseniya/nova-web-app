@@ -28,6 +28,7 @@ const routes = createBrowserRouter(
       <Route index element={<Home />} />,
       <Route path="/login" element={<LoginPage />} />,
       <Route path="/register" element={<RegisterPage />} />,
+      {/* Protected dashboard route */}
       <Route element={<ProtectedRoutes />}>
         <Route path="/dashboard" element={<WebBase />}>
           <Route index element={<NewNote />} />,
