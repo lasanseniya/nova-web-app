@@ -18,7 +18,7 @@ const {
 router.use(
   cors({
     credentials: true,
-    origin: "http://localhost:3003",
+    origin: process.env.FRONTEND_URL,
   })
 );
 
@@ -30,8 +30,5 @@ router.post("/login", loginUser);
 
 // endpoint: GET /profile
 router.get("/profile", validateToken, getUserProfile);
-
-// // endpoint: POST /logout
-// router.post("/logout", logoutuser);
 
 module.exports = router;

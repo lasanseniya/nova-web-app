@@ -1,7 +1,6 @@
 const express = require("express");
 require("dotenv").config();
 const cors = require("cors");
-const cookieParser = require("cookie-parser");
 
 /**
  * Separate routers for different route sets
@@ -23,7 +22,7 @@ const app = express(); // Initialize express app
 
 app.use(
   cors({
-    origin: "http://localhost:3003", // URL of the frontend app
+    origin: process.env.FRONTEND_URL, // URL of the frontend app
     credentials: true,
   })
 );
