@@ -18,7 +18,7 @@ import Error401 from "./pages/Error401.jsx";
 import ProtectedRoutes from "./utils/ProtectedRoutes.jsx";
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL;
 
 axios.defaults.withCredentials = true;
 

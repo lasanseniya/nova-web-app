@@ -11,7 +11,6 @@ const {
   registerUser,
   loginUser,
   getUserProfile,
-  logoutuser,
 } = require("../controllers/authController");
 
 // Middleware for router
