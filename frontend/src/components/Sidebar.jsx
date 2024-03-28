@@ -3,7 +3,6 @@ import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { VscAdd } from "react-icons/vsc";
 import { TfiFiles } from "react-icons/tfi";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Sidebar() {
@@ -11,8 +10,7 @@ function Sidebar() {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    axios.post("/logout");
-    localStorage.removeItem("user");
+    localStorage.removeItem("token");
     navigate("/login");
   };
 

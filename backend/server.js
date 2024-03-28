@@ -31,9 +31,6 @@ app.use(
 // Middleware for parsing JSON payloads
 app.use(express.json());
 
-// Middleware for parsing cookies
-app.use(cookieParser());
-
 // Define different instances of express.Router() for different route sets
 const gptRouterInstance = express.Router();
 const authRouterInstance = express.Router();

@@ -31,7 +31,7 @@ router.post("/login", loginUser);
 // endpoint: GET /profile
 router.get("/profile", validateToken, getUserProfile);
 
-// endpoint: POST /logout
-router.post("/logout", logoutuser);
+// // endpoint: POST /logout
+// router.post("/logout", logoutuser);
 
 module.exports = router;

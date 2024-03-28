@@ -22,7 +22,14 @@ function MyNotes() {
     // Fetch notes from backend when component mounts and whenever buttons state changes
     const fetchNotes = async () => {
       try {
-        const response = await axios.get("/api/notes");
+        // Access token from local storage
+        const token = localStorage.getItem("token");
+
+        const response = await axios.get("/api/notes", {
+          headers: {
+            Authorization: `Bearer ${token}`, // Send the token in headers
+          },
+        });
         setButtons(response.data); // Assuming response.data is an array of notes
       } catch (error) {
         console.error("Error fetching notes:", error);
@@ -35,7 +42,12 @@ function MyNotes() {
   const handleDeleteButtonClick = async (deleteButtonId) => {
     // Delete note with the given ID from the backend
     try {
-      await axios.delete(`/api/notes/${deleteButtonId}`);
+      const token = localStorage.getItem("token");
+      await axios.delete(`/api/notes/${deleteButtonId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       // Update the buttons state to remove the deleted note
       setButtons((prevButtons) =>
@@ -47,23 +59,29 @@ function MyNotes() {
     }
   };
 
-  const handleNameClick = (buttonId, structuredNote, cueQuestions, summary, title) => {
+  const handleNameClick = (
+    buttonId,
+    structuredNote,
+    cueQuestions,
+    summary,
+    title,
+  ) => {
     setActiveTab("styled-tab");
     setStructuredNote(structuredNote);
     setCueQuestions(cueQuestions);
     setSummary(summary);
     setSelectedNoteId(buttonId);
-    setTitle(title)
+    setTitle(title);
     console.log(`Clicked button name with ID: ${buttonId}`);
   };
 
   return (
     <div className="sm:ml-64">
       <div className="mt-20 h-[calc(100vh-5rem)] bg-gradient-to-b from-slate-900 via-slate-900 to-sky-950 p-4 text-white dark:border-gray-700">
-        <div className="flex-row h-full overflow-y-scroll">
+        <div className="h-full flex-row overflow-y-scroll">
           <div className="mb-4 border-b border-gray-200 dark:border-gray-700">
             <ul
-              className="flex flex-wrap -mb-px text-sm font-medium text-center"
+              className="-mb-px flex flex-wrap text-center text-sm font-medium"
               id="default-styled-tab"
               role="tablist"
             >
@@ -118,18 +136,18 @@ function MyNotes() {
                       .map((note) => (
                         // Note pill holding relevant information of each note
                         <div
-                          className="flex items-center justify-between w-full px-4 py-2 mb-5 text-black rounded shadow-md bg-slate-100 focus:outline-none"
+                          className="mb-5 flex w-full items-center justify-between rounded bg-slate-100 px-4 py-2 text-black shadow-md focus:outline-none"
                           key={note._id}
                         >
                           <button
-                            className="w-full px-2 py-1 text-xs text-black rounded bg-slate-100 hover:bg-slate-200 focus:outline-none lg:text-base"
+                            className="w-full rounded bg-slate-100 px-2 py-1 text-xs text-black hover:bg-slate-200 focus:outline-none lg:text-base"
                             onClick={() =>
                               handleNameClick(
                                 note._id,
                                 note.structuredNote,
                                 note.cueQuestions,
                                 note.summary,
-                                note.title
+                                note.title,
                               )
                             }
                           >
@@ -142,7 +160,7 @@ function MyNotes() {
                           </button>
 
                           <button
-                            className="px-2 py-1 text-black rounded shadow-md bg-slate-200 hover:bg-red-100 focus:outline-none"
+                            className="rounded bg-slate-200 px-2 py-1 text-black shadow-md hover:bg-red-100 focus:outline-none"
                             onClick={() => handleDeleteButtonClick(note._id)}
                           >
                             <svg
@@ -151,7 +169,7 @@ function MyNotes() {
                               viewBox="0 0 24 24"
                               strokeWidth="1.5"
                               stroke="currentColor"
-                              className="w-6 h-6"
+                              className="h-6 w-6"
                             >
                               <path
                                 strokeLinecap="round"

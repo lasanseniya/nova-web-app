@@ -2,8 +2,10 @@ import InputBox from "./InputBox";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function LoginForm() {
+  const navigate = useNavigate();
   const [data, setData] = useState({
     email: "",
     password: "",
@@ -22,8 +24,12 @@ function LoginForm() {
         toast.error(data.error);
       } else {
         setData({});
+        // store token in local storage
+        localStorage.setItem("token", data.token);
+
         toast.success("Successfully logged in!");
-        window.location.href = "/dashboard";
+        // window.location.href = "/dashboard";
+        navigate("/dashboard");
       }
     } catch (error) {
       toast.error("An error occurd. Please try again later.");

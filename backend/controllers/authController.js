@@ -84,32 +84,21 @@ const loginUser = asyncHandler(async (req, res) => {
       process.env.ACCESS_TOKEN_SECRET
     );
 
-    // Send the jwt token inside a cookie
-    res.cookie("token", token).json({ token });
+    // Send the token as a json response
+    res.json({ token });
   } else {
     res.json({ error: "Invalid Password!" });
   }
 });
 
-// Logout user
-const logoutuser = (req, res) => {
-  // Clear the cookie
-  const { token } = req.cookies;
-
-  if (token) {
-    res.clearCookie("token").json({ message: "Logged out" });
-  } else {
-    res.json({ error: "Not logged in" });
-  }
-};
-
 // Get user profile
 const getUserProfile = (req, res) => {
-  const { token } = req.cookies;
+  const token = req.headers.authorization.split(" ")[1];
 
   if (token) {
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, {}, (err, user) => {
       if (err) throw err;
+      console.log(user);
       res.json(user);
     });
   } else {
@@ -117,4 +106,4 @@ const getUserProfile = (req, res) => {
   }
 };
 
-module.exports = { registerUser, loginUser, logoutuser, getUserProfile };
+module.exports = { registerUser, loginUser, getUserProfile };
