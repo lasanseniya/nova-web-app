@@ -11,6 +11,7 @@ const {
   registerUser,
   loginUser,
   getUserProfile,
+  forgotPassword,
 } = require("../controllers/authController");
 
 // Middleware for router
@@ -29,5 +30,8 @@ router.post("/login", loginUser);
 
 // endpoint: GET /profile
 router.get("/profile", validateToken, getUserProfile);
+
+// endpoint: POST /forgot-password
+router.post("/forgot-password", forgotPassword);
 
 module.exports = router;

@@ -28,11 +28,30 @@ function LoginForm() {
         localStorage.setItem("token", data.token);
 
         toast.success("Successfully logged in!");
-        // window.location.href = "/dashboard";
         navigate("/dashboard");
       }
     } catch (error) {
-      toast.error("An error occurd. Please try again later.");
+      toast.error("An error occured. Please try again later.");
+    }
+  };
+
+  const handleForgotPwd = async () => {
+    // Get email from state data
+    const { email } = data;
+
+    try {
+      // send the email to backend's endpoint
+      // catch the response in data
+      const { data } = await axios.post("/forgot-password", {
+        email,
+      });
+
+      // if there is an error, show the error message
+      if (data.error) {
+        toast.error(data.error);
+      }
+    } catch (error) {
+      toast.error("An error occured. Please try again later.");
     }
   };
   return (
@@ -68,7 +87,10 @@ function LoginForm() {
         ></InputBox>
       </div>
 
-      <h3 className="cursor-pointer py-5 text-right text-[13px] underline underline-offset-1">
+      <h3
+        onClick={handleForgotPwd}
+        className="cursor-pointer py-5 text-right text-[13px] underline underline-offset-1"
+      >
         Forgot Password?
       </h3>
 

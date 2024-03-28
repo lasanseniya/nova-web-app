@@ -2,6 +2,7 @@ const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
 const { hashPassword, comparePassword } = require("../helpers/auth");
 const jwt = require("jsonwebtoken");
+const nodemailer = require("nodemailer");
 
 /**
  * @desc   Register a new user
@@ -106,4 +107,62 @@ const getUserProfile = (req, res) => {
   }
 };
 
-module.exports = { registerUser, loginUser, getUserProfile };
+const forgotPassword = asyncHandler(async (res, req) => {
+  const { email } = req.body;
+
+  // Check if the user's email exist in the DB
+  const user = await User.findOne({ email });
+
+  if (!user) {
+    return res.json({ error: "User not found, please register first!" });
+  }
+
+  // IF user exists
+  // Create a reset password token
+  const resetToken = jwt.sign(
+    {
+      user: {
+        id: user.id,
+      },
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    {
+      expiresIn: "10m",
+    }
+  );
+
+  // Send email to user with the reset password link
+  const transporter = nodemailer.createTransport({
+    // senders email and password
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL_FROM,
+      pass: process.env.EMAIL_PASSWORD,
+    },
+  });
+
+  // Email data to be sent
+  const emailData = {
+    from: process.env.EMAIL_FROM,
+    to: email,
+    subject: "Password Reset Link for Nova web app",
+    html: `
+      <h1>Please use the following link to reset your password</h1>
+      <a href=${process.env.FRONTEND_URL}/password-reset</a>
+      <hr />
+    `,
+  };
+
+  transporter.sendMail(emailData, (err, info) => {
+    if (err) {
+      return res.json({ error: err.message });
+    }
+
+    return res.json({ message: `Email has been sent to ${email}` });
+  });
+
+  // Send the token as a json response
+  res.json({ resetToken });
+});
+
+module.exports = { registerUser, loginUser, getUserProfile, forgotPassword };
