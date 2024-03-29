@@ -12,6 +12,7 @@ const {
   loginUser,
   getUserProfile,
   forgotPassword,
+  resetPassword,
 } = require("../controllers/authController");
 
 // Middleware for router
@@ -33,5 +34,8 @@ router.get("/profile", validateToken, getUserProfile);
 
 // endpoint: POST /forgot-password
 router.post("/forgot-password", forgotPassword);
+
+// endpoint: POST /reset-password
+router.post("/reset-password/:id/:token", resetPassword);
 
 module.exports = router;

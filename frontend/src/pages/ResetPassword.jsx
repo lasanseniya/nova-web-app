@@ -1,6 +1,9 @@
 import { useState } from "react";
 import InputBox from "../components/forms/InputBox";
 import { useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 
 function ResetPassword() {
   const navigate = useNavigate();
@@ -8,10 +11,18 @@ function ResetPassword() {
     password: "",
   });
 
-  const handlePasswordReset = (e) => {
+  const { id, token } = useParams();
+
+  const handlePasswordReset = async (e) => {
     e.preventDefault();
-    console.log("Reset Password");
-    navigate("/login");
+    const res = await axios.post(`/reset-password/${id}/${token}`, data);
+
+    if (res.error) {
+      toast.error(res.error);
+    } else {
+      toast.success("Password reset successful!");
+      navigate("/login");
+    }
   };
 
   return (
@@ -27,7 +38,7 @@ function ResetPassword() {
           onChange={(e) =>
             setData({
               ...data,
-              email: e.target.value,
+              password: e.target.value,
             })
           }
         ></InputBox>

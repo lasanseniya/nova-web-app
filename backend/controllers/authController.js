@@ -153,7 +153,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
     subject: "Password Reset Link for Nova web app",
     html: `
       <h1>Please use the following link to reset your password</h1>
-      <a href=${process.env.FRONTEND_URL}/password-reset/${resetToken}> Reset here </a>
+      <a href=${process.env.FRONTEND_URL}/password-reset/${user.id}/${resetToken}> Reset here </a>
       <hr />
     `,
   };
@@ -167,4 +167,34 @@ const forgotPassword = asyncHandler(async (req, res) => {
   });
 });
 
-module.exports = { registerUser, loginUser, getUserProfile, forgotPassword };
+/**
+ * @desc   Reset password
+ * @route  POST /reset-password
+ * @access Public
+ */
+const resetPassword = asyncHandler(async (req, res) => {
+  const { id, token } = req.params;
+  const { password } = req.body;
+
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, {}, async (err, user) => {
+    if (err) {
+      return res.json({ error: "Expired link. Try again" });
+    }
+
+    // Hash the new password
+    const hashedPassword = await hashPassword(password);
+
+    // Update the user's password
+    await User.findByIdAndUpdate(id, { password: hashedPassword });
+
+    return res.json({ message: "Password reset successful" });
+  });
+});
+
+module.exports = {
+  registerUser,
+  loginUser,
+  getUserProfile,
+  forgotPassword,
+  resetPassword,
+};

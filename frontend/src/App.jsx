@@ -36,9 +36,9 @@ const routes = createBrowserRouter(
           <Route index element={<NewNote />} />,
           <Route path="my-notes" element={<MyNotes />} />,
         </Route>
-        <Route path="/password-reset" element={<PasswordReset />} />,
       </Route>
       <Route path="/forgot-password" element={<ForgotPassword />} />,
+      <Route path="/password-reset/:id/:token" element={<PasswordReset />} />,
       <Route path="/error" element={<Error401 />} />,
     </Route>,
   ),
