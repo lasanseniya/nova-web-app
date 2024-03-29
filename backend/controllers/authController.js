@@ -153,7 +153,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
     subject: "Password Reset Link for Nova web app",
     html: `
       <h1>Please use the following link to reset your password</h1>
-      <a href=${process.env.FRONTEND_URL}/password-reset/${token}> Reset here </a>
+      <a href=${process.env.FRONTEND_URL}/password-reset/${resetToken}> Reset here </a>
       <hr />
     `,
   };
