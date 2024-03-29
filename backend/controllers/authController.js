@@ -107,7 +107,12 @@ const getUserProfile = (req, res) => {
   }
 };
 
-const forgotPassword = asyncHandler(async (res, req) => {
+/**
+ * @desc   Forgot password
+ * @route  POST /forgot-password
+ * @access Public
+ */
+const forgotPassword = asyncHandler(async (req, res) => {
   const { email } = req.body;
 
   // Check if the user's email exist in the DB
@@ -143,12 +148,12 @@ const forgotPassword = asyncHandler(async (res, req) => {
 
   // Email data to be sent
   const emailData = {
-    from: process.env.EMAIL_FROM,
+    from: `Nova study notes ${process.env.EMAIL_FROM}`,
     to: email,
     subject: "Password Reset Link for Nova web app",
     html: `
       <h1>Please use the following link to reset your password</h1>
-      <a href=${process.env.FRONTEND_URL}/password-reset</a>
+      <a href=${process.env.FRONTEND_URL}/password-reset/${token}> Reset here </a>
       <hr />
     `,
   };
@@ -158,11 +163,8 @@ const forgotPassword = asyncHandler(async (res, req) => {
       return res.json({ error: err.message });
     }
 
-    return res.json({ message: `Email has been sent to ${email}` });
+    return res.json({ message: `Email has been sent to ${email}`, resetToken });
   });
-
-  // Send the token as a json response
-  res.json({ resetToken });
 });
 
 module.exports = { registerUser, loginUser, getUserProfile, forgotPassword };

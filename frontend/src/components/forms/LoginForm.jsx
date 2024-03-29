@@ -35,25 +35,6 @@ function LoginForm() {
     }
   };
 
-  const handleForgotPwd = async () => {
-    // Get email from state data
-    const { email } = data;
-
-    try {
-      // send the email to backend's endpoint
-      // catch the response in data
-      const { data } = await axios.post("/forgot-password", {
-        email,
-      });
-
-      // if there is an error, show the error message
-      if (data.error) {
-        toast.error(data.error);
-      }
-    } catch (error) {
-      toast.error("An error occured. Please try again later.");
-    }
-  };
   return (
     <form onSubmit={handleUserLogin}>
       <div className="mt-6">
@@ -87,11 +68,8 @@ function LoginForm() {
         ></InputBox>
       </div>
 
-      <h3
-        onClick={handleForgotPwd}
-        className="cursor-pointer py-5 text-right text-[13px] underline underline-offset-1"
-      >
-        Forgot Password?
+      <h3 className="cursor-pointer py-5 text-right text-[13px] underline underline-offset-1">
+        <a href="/forgot-password">Forgot Password?</a>
       </h3>
 
       <div>

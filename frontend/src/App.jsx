@@ -17,7 +17,8 @@ import MyNotes from "./components/MyNotes.jsx";
 import Error401 from "./pages/Error401.jsx";
 import ProtectedRoutes from "./utils/ProtectedRoutes.jsx";
 import axios from "axios";
-import PasswordReset from "./pages/PasswordRest.jsx";
+import ForgotPassword from "./pages/ForgotPassword.jsx";
+import PasswordReset from "./pages/ResetPassword.jsx";
 
 axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL;
 
@@ -37,6 +38,7 @@ const routes = createBrowserRouter(
         </Route>
         <Route path="/password-reset" element={<PasswordReset />} />,
       </Route>
+      <Route path="/forgot-password" element={<ForgotPassword />} />,
       <Route path="/error" element={<Error401 />} />,
     </Route>,
   ),
