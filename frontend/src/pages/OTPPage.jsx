@@ -30,6 +30,33 @@ function OTPPage() {
     }
   };
 
+  const handleResendOtp = async () => {
+    const email = localStorage.getItem("email");
+    // remove the existing OTP from database
+    try {
+      const response = await axios.delete("/delete-otp", {
+        email,
+      });
+
+      if (response.error) {
+        toast.error(response.error);
+      } else {
+        // resend a new otp to email
+        const response = await axios.post("/forgot-password", {
+          data: { email },
+        });
+
+        if (response.data.error) {
+          toast.error(response.error);
+        } else {
+          toast.success("OTP has been sent 📨");
+        }
+      }
+    } catch (error) {
+      toast.error("An error occured. Please try again later.");
+    }
+  };
+
   return (
     <form onSubmit={handleOTP}>
       <InputBox
@@ -46,6 +73,7 @@ function OTPPage() {
         }
       ></InputBox>
       <button type="submit">Verify OTP</button>
+      <button onClick={handleResendOtp}>Resend OTP</button>
     </form>
   );
 }

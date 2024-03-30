@@ -212,7 +212,7 @@ const deleteOTP = asyncHandler(async (req, res) => {
   if (!OTP) {
     return res.json({ error: "Invalid OTP" });
   } else {
-    return res.json({ message: "Passwrod reset successfull" });
+    return res.json({ message: "OTP deleted" });
   }
 });
 

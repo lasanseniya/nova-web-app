@@ -39,7 +39,7 @@ function ResetPassword() {
         toast.error(response.data.error);
       }
 
-      toast.success(response.data.message);
+      toast.success("Password reset successfully!");
       localStorage.removeItem("email");
       localStorage.removeItem("verified");
       navigate("/login");
