@@ -1,26 +1,47 @@
 import { useState } from "react";
 import InputBox from "../components/forms/InputBox";
 import { useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
 function ResetPassword() {
   const navigate = useNavigate();
   const [data, setData] = useState({
+    email: localStorage.getItem("email"),
     password: "",
+    conf_pwd: "",
   });
-
-  const { id, token } = useParams();
 
   const handlePasswordReset = async (e) => {
     e.preventDefault();
-    const res = await axios.post(`/reset-password/${id}/${token}`, data);
 
-    if (res.error) {
-      toast.error(res.error);
+    const { email, password, conf_pwd } = data;
+
+    if (password !== conf_pwd) {
+      toast.error("Passwords do not match");
+      return;
+    }
+
+    const response = await axios.put("/reset-password", {
+      email,
+      password,
+    });
+
+    if (response.data.error) {
+      toast.error(response.data.error);
     } else {
-      toast.success("Password reset successful!");
+      // remove the OTP from the DB
+      const response = await axios.delete("/delete-otp", {
+        data: { email },
+      });
+
+      if (response.data.error) {
+        toast.error(response.data.error);
+      }
+
+      toast.success(response.data.message);
+      localStorage.removeItem("email");
+      localStorage.removeItem("verified");
       navigate("/login");
     }
   };
@@ -42,6 +63,14 @@ function ResetPassword() {
             })
           }
         ></InputBox>
+        <InputBox
+          id="conf_pwd"
+          placeholder="Enter confirm password"
+          name="confirm"
+          type="password"
+          value={data.conf_pwd}
+          onChange={(e) => setData({ ...data, conf_pwd: e.target.value })}
+        />
         <button type="submit">All set!</button>
       </form>
     </div>

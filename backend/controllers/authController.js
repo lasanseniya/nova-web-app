@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const User = require("../models/userModel");
+const OTPModel = require("../models/OTPModel");
 const { hashPassword, comparePassword } = require("../helpers/auth");
 const jwt = require("jsonwebtoken");
 const nodemailer = require("nodemailer");
@@ -122,20 +123,6 @@ const forgotPassword = asyncHandler(async (req, res) => {
     return res.json({ error: "User not found, please register first!" });
   }
 
-  // IF user exists
-  // Create a reset password token
-  const resetToken = jwt.sign(
-    {
-      user: {
-        id: user.id,
-      },
-    },
-    process.env.ACCESS_TOKEN_SECRET,
-    {
-      expiresIn: "10m",
-    }
-  );
-
   // Send email to user with the reset password link
   const transporter = nodemailer.createTransport({
     // senders email and password
@@ -146,25 +133,87 @@ const forgotPassword = asyncHandler(async (req, res) => {
     },
   });
 
+  // Generate OTP at random
+  const OTP = Math.floor(100000 + Math.random() * 900000);
+
   // Email data to be sent
   const emailData = {
     from: `Nova study notes ${process.env.EMAIL_FROM}`,
     to: email,
-    subject: "Password Reset Link for Nova web app",
+    subject: "Password Reset Link from Nova",
     html: `
-      <h1>Please use the following link to reset your password</h1>
-      <a href=${process.env.FRONTEND_URL}/password-reset/${user.id}/${resetToken}> Reset here </a>
-      <hr />
+      <div style = "background: linear-gradient(180deg, #001125 0%, #002755 100%); padding: 50px">
+      <div style= "padding: 20px;">
+      <h1 style="color: white;"> Hey there! </h1>
+      </ br>
+      <h3 style="color:white;"> Use this code to reset your password and get back on your study notes. </h3>
+      <p style="color: #B4B4B8"> If you didn't request for an OTP, you can safely ignore it </p>
+      </ br>
+      </div>
+      <div style="padding: 20px;">
+      <span style="color:#0F0F0F; font-size: 40px; font-family: Lucida Console; background-color: #5CB1FF; border-radius: 10px; padding: 20px;">
+      ${OTP}
+      </span>
+      </div>
+      </div>
     `,
   };
+
+  // store the OTP in the DB
+  const otp = await OTPModel.create({
+    email,
+    code: OTP,
+  });
+
+  if (!otp) {
+    return res.json({ error: "Cannot generate OTP" });
+  }
 
   transporter.sendMail(emailData, (err, info) => {
     if (err) {
       return res.json({ error: err.message });
     }
 
-    return res.json({ message: `Email has been sent to ${email}`, resetToken });
+    return res.json({ message: `Email has been sent to ${email}` });
   });
+});
+
+/**
+ * @desc   verify OTP
+ * @route  POST /verify-otp
+ * @access Public
+ */
+const verifyOTP = asyncHandler(async (req, res) => {
+  const { email, code } = req.body;
+
+  // Check if the OTP exists in the DB
+  const OTP = await OTPModel.findOne({ email, code });
+
+  if (!OTP) {
+    return res.json({ error: "Invalid OTP" });
+  }
+
+  // did not check if the OTp has expired
+
+  res.json({ message: "OTP verified successfully!" });
+});
+
+/**
+ * @desc delete OTP
+ * @route DELETE /delete-otp
+ * @access Public
+ */
+const deleteOTP = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+
+  // Check if the OTP exists in the DB
+  const OTP = await OTPModel.findOneAndDelete({ email });
+
+  if (!OTP) {
+    return res.json({ error: "Invalid OTP" });
+  } else {
+    return res.json({ message: "Passwrod reset successfull" });
+  }
 });
 
 /**
@@ -173,22 +222,19 @@ const forgotPassword = asyncHandler(async (req, res) => {
  * @access Public
  */
 const resetPassword = asyncHandler(async (req, res) => {
-  const { id, token } = req.params;
+  const { email } = req.body;
   const { password } = req.body;
 
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, {}, async (err, user) => {
-    if (err) {
-      return res.json({ error: "Expired link. Try again" });
-    }
+  const user = await User.findOne({ email });
 
-    // Hash the new password
-    const hashedPassword = await hashPassword(password);
+  // Hash the new password
+  const hashedPassword = await hashPassword(password);
 
-    // Update the user's password
-    await User.findByIdAndUpdate(id, { password: hashedPassword });
+  // Update the user's password
+  user.password = hashedPassword;
+  await user.save();
 
-    return res.json({ message: "Password reset successful" });
-  });
+  res.json({ message: "Password reset successful!" });
 });
 
 module.exports = {
@@ -197,4 +243,6 @@ module.exports = {
   getUserProfile,
   forgotPassword,
   resetPassword,
+  verifyOTP,
+  deleteOTP,
 };

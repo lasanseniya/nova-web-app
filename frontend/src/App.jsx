@@ -16,9 +16,11 @@ import NewNote from "./components/NewNote.jsx";
 import MyNotes from "./components/MyNotes.jsx";
 import Error401 from "./pages/Error401.jsx";
 import ProtectedRoutes from "./utils/ProtectedRoutes.jsx";
+import ProtectedOTP from "./utils/ProtectedOTP.jsx";
 import axios from "axios";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import PasswordReset from "./pages/ResetPassword.jsx";
+import OTPPage from "./pages/otpPage.jsx";
 
 axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL;
 
@@ -38,7 +40,10 @@ const routes = createBrowserRouter(
         </Route>
       </Route>
       <Route path="/forgot-password" element={<ForgotPassword />} />,
-      <Route path="/password-reset/:id/:token" element={<PasswordReset />} />,
+      <Route path="/OTP-page" element={<OTPPage />} />,
+      <Route element={<ProtectedOTP />}>
+        <Route path="/password-reset" element={<PasswordReset />} />,
+      </Route>
       <Route path="/error" element={<Error401 />} />,
     </Route>,
   ),

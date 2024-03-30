@@ -23,7 +23,9 @@ function ForgotPassword() {
       if (data.error) {
         toast.error(data.error);
       } else {
-        navigate("/login");
+        toast.success("OTP sent to your email");
+        localStorage.setItem("email", email);
+        navigate("/OTP-page");
       }
     } catch (error) {
       toast.error("An error occured. Please try again later.");
@@ -47,7 +49,7 @@ function ForgotPassword() {
             })
           }
         ></InputBox>
-        <button type="submit">Get reset link</button>
+        <button type="submit">Get OTP</button>
       </form>
     </div>
   );
