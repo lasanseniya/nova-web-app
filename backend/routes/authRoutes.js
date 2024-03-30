@@ -44,6 +44,6 @@ router.put("/reset-password", resetPassword);
 router.post("/verify-otp", verifyOTP);
 
 // endpoint: DELETE /delete-otp
-router.delete("/delete-otp", deleteOTP);
+router.delete("/delete-otp/:email", deleteOTP);
 
 module.exports = router;

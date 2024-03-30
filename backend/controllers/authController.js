@@ -200,19 +200,19 @@ const verifyOTP = asyncHandler(async (req, res) => {
 
 /**
  * @desc delete OTP
- * @route DELETE /delete-otp
+ * @route DELETE /delete-otp/:email
  * @access Public
  */
 const deleteOTP = asyncHandler(async (req, res) => {
-  const { email } = req.body;
+  const email = req.params.email;
 
   // Check if the OTP exists in the DB
   const OTP = await OTPModel.findOneAndDelete({ email });
 
   if (!OTP) {
-    return res.json({ error: "Invalid OTP" });
+    return res.json({ message: "OTP removed" });
   } else {
-    return res.json({ message: "OTP deleted" });
+    return res.json({ error: "OTP not removed" });
   }
 });
 
