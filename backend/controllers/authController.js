@@ -211,8 +211,6 @@ const deleteOTP = asyncHandler(async (req, res) => {
 
   if (!OTP) {
     return res.json({ message: "OTP removed" });
-  } else {
-    return res.json({ error: "OTP not removed" });
   }
 });
 

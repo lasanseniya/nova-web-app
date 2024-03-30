@@ -31,7 +31,7 @@ function ResetPassword() {
       toast.error(response.data.error);
     } else {
       // remove the OTP from the DB
-      const response = await axios.delete(`/delete-otp?email=${email}`);
+      const response = await axios.delete(`/delete-otp/${email}`);
 
       if (response.data.error) {
         toast.error(response.data.error);

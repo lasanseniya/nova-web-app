@@ -35,7 +35,7 @@ function OTPPage() {
     const email = localStorage.getItem("email");
     // remove the existing OTP from database
     try {
-      const response = await axios.delete(`/delete-otp?email=${email}`);
+      const response = await axios.delete(`/delete-otp/${email}`);
 
       if (response.data.error) {
         toast.error(response.data.error);
