@@ -22,25 +22,27 @@ function ResetPassword() {
       return;
     }
 
-    const response = await axios.put("/reset-password", {
-      email,
-      password,
-    });
+    try {
+      const resetPasswordResponse = await axios.post("/reset-password", {
+        email,
+        password,
+      });
 
-    if (response.data.error) {
-      toast.error(response.data.error);
-    } else {
-      // remove the OTP from the DB
-      const response = await axios.delete(`/delete-otp/${email}`);
-
-      if (response.data.error) {
-        toast.error(response.data.error);
+      if (resetPasswordResponse.data.error) {
+        toast.error(resetPasswordResponse.data.error);
+        return;
       }
+
+      // Remove the OTP from the DB
+      await axios.delete(`/delete-otp/${email}`);
 
       toast.success("Password reset successfully!");
       localStorage.removeItem("email");
       localStorage.removeItem("verified");
       navigate("/login");
+    } catch (error) {
+      toast.error("An error occurred");
+      console.error("Error:", error);
     }
   };
 

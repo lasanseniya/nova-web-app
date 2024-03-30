@@ -38,7 +38,7 @@ router.get("/profile", validateToken, getUserProfile);
 router.post("/forgot-password", forgotPassword);
 
 // endpoint: POST /reset-password
-router.put("/reset-password", resetPassword);
+router.post("/reset-password", resetPassword);
 
 // endpoint: POST /verify-otp
 router.post("/verify-otp", verifyOTP);
