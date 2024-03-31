@@ -29,14 +29,24 @@ function NoteViewer({
 
   // Function to handle saving the note to mongoDB
   const handleSaveNote = async () => {
-    const { data } = await axios.put("/api/notes/" + selectedNoteId + "", {
-      structuredNote: editedStructuredNote
-        ? editedStructuredNote
-        : structuredNote,
-      summary: editedSummary ? editedSummary : summary,
-      cueQuestions: editedcueQuestions ? editedcueQuestions : cueQuestions,
-      title: editedTitle ? editedTitle : title,
-    });
+    const token = localStorage.getItem("token");
+
+    const { data } = await axios.put(
+      "/api/notes/" + selectedNoteId,
+      {
+        structuredNote: editedStructuredNote
+          ? editedStructuredNote
+          : structuredNote,
+        summary: editedSummary ? editedSummary : summary,
+        cueQuestions: editedcueQuestions ? editedcueQuestions : cueQuestions,
+        title: editedTitle ? editedTitle : title,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    );
 
     if (data.error) {
       toast.error(data.error);

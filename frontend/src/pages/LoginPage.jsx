@@ -1,30 +1,26 @@
-import React from 'react'
 import LoginForm from "../components/forms/LoginForm";
-import ImageCard from '../components/forms/ImageCard';
+import ImageCard from "../components/forms/ImageCard";
 
 function LoginPage() {
   return (
-    <div className="flex py-16 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#2a4472] via-[#031f54] to-[#000714] h-screen justify-center items-center">
-      <div className="flex bg-white rounded-lg shadow-lg overflow-hidden mx-auto max-w-sm lg:max-w-4xl">
+    <div className="flex h-screen items-center justify-center bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#2a4472] via-[#031f54] to-[#000714] py-16">
+      <div className="mx-auto flex max-w-sm overflow-hidden rounded-lg bg-white shadow-lg lg:max-w-4xl">
+        <ImageCard></ImageCard>
 
-          <ImageCard></ImageCard>
-          
         <div className="w-full p-8 lg:w-1/2">
-          <h2 className=" text-3xl font-semibold text-gray-700 text-center mt-7">
+          <h2 className=" mt-7 text-center text-3xl font-semibold text-gray-700">
             Login
           </h2>
 
           <LoginForm></LoginForm>
 
           <div className="mt-5 flex items-center justify-between">
-            <span className="border-b w-1/5 lg:w-1/4"></span>
-            <p className="text-xs text-center text-gray-500 uppercase">
-              OR
-            </p>
-            <span className="border-b w-1/5 lg:w-1/4"></span>
+            <span className="w-1/5 border-b lg:w-1/4"></span>
+            <p className="text-center text-xs uppercase text-gray-500">OR</p>
+            <span className="w-1/5 border-b lg:w-1/4"></span>
           </div>
 
-          <button className="bg-white border py-2 w-full rounded-md mt-5 flex justify-center items-center text-sm border-gray-300">
+          <button className="mt-5 flex w-full items-center justify-center rounded-md border border-gray-300 bg-white py-2 text-sm">
             <svg
               className="mr-3"
               xmlns="http://www.w3.org/2000/svg"
@@ -54,8 +50,10 @@ function LoginPage() {
             Continue with Google
           </button>
 
-          <div className="text-xs flex justify-center items-center mt-7 w-full">
-            <p className="px-3 mb-6"><a href='/register'>Don`t have an account? Register</a></p>
+          <div className="mt-7 flex w-full items-center justify-center text-xs">
+            <p className="mb-6 px-3">
+              <a href="/register">Don`t have an account? Register</a>
+            </p>
           </div>
         </div>
       </div>
@@ -63,4 +61,4 @@ function LoginPage() {
   );
 }
 
-export default LoginPage
+export default LoginPage;
