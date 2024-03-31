@@ -1,5 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
+
 import {
   FaBook,
   FaQuestion,
@@ -22,6 +24,9 @@ Feature.propTypes = {
 };
 
 function LandingPage() {
+
+  const navigate = useNavigate();
+
   return (
     <div className="mx-auto flex min-h-screen flex-col items-center justify-center bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#2a4472] via-[#031f54] to-[#000714]">
       <div className="flex flex-col items-center sm:flex-col sm:justify-center">
@@ -38,7 +43,10 @@ function LandingPage() {
         <Feature Icon={FaQuestion} text="Cue questions" />
         <Feature Icon={FaClipboardList} text="Summary" />
       </div>
-      <button className="mt-2 mt-9 flex items-center rounded-lg border-2 border-blue-500 bg-transparent p-3 text-sm tracking-wider text-white sm:text-base">
+      <button
+        className="mt-2 mt-9 flex items-center rounded-lg border-2 border-blue-500 bg-transparent p-3 text-sm tracking-wider text-white sm:text-base"
+        onClick={() => navigate("/login")}
+      >
         Get started
         <FaArrowRight className="ml-1" />
       </button>
