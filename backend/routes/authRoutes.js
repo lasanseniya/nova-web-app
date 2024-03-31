@@ -15,6 +15,7 @@ const {
   resetPassword,
   verifyOTP,
   deleteOTP,
+  resendOTP,
 } = require("../controllers/authController");
 
 // Middleware for router
@@ -42,6 +43,9 @@ router.post("/reset-password", resetPassword);
 
 // endpoint: POST /verify-otp
 router.post("/verify-otp", verifyOTP);
+
+// endpoint: POST /verify-otp
+router.post("/resend-otp", resendOTP);
 
 // endpoint: DELETE /delete-otp
 router.delete("/delete-otp/:email", deleteOTP);

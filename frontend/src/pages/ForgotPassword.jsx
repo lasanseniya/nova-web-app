@@ -23,7 +23,7 @@ function ForgotPassword() {
       if (data.error) {
         toast.error(data.error);
       } else {
-        toast.success("OTP sent to your email");
+        toast.success("OTP has been sent 📨");
         localStorage.setItem("email", email);
         navigate("/OTP-page");
       }

@@ -207,11 +207,135 @@ const deleteOTP = asyncHandler(async (req, res) => {
   const email = req.params.email;
 
   // Check if the OTP exists in the DB
-  const OTP = await OTPModel.findOneAndDelete({ email });
+  const maxRetries = 3;
 
-  if (!OTP) {
+  // Function to attempt OTP deletion with retries
+  const deleteOTP = async (attempt) => {
+    try {
+      const OTP = await OTPModel.findOneAndDelete({ email });
+      console.log(`OTP: ${OTP}`); //-------- DEBUGGING
+    } catch (error) {
+      console.error(`Error deleting OTP on attempt ${attempt}:`, error);
+      if (attempt < maxRetries) {
+        // Wait a short time before retrying
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        return deleteOTP(attempt + 1);
+      } else {
+        throw new Error("Failed to delete OTP after multiple retries");
+      }
+    }
+  };
+
+  // Call the retry function for OTP deletion
+  let deletedOTP;
+  try {
+    deletedOTP = await deleteOTP(1); // Start with attempt 1
+    console.log(`deleted OTP: ${deletedOTP}`);
+  } catch (error) {
+    console.error("Error deleting OTP:", error);
+    return res.json({ error: "Failed to resend OTP" });
+  }
+
+  // deletion success
+  if (deletedOTP === undefined) {
     return res.json({ message: "OTP removed" });
   }
+});
+
+/**
+ * @desc Resend OTP
+ * @route POST / resend
+ * @access public
+ */
+const resendOTP = asyncHandler(async (req, res) => {
+  const { email } = req.body;
+
+  console.log(`email: ${email}`); //------ DEBUGGING
+
+  // delete the existing otp
+  // Define the maximum number of retries
+  const maxRetries = 3;
+
+  // Function to attempt OTP deletion with retries
+  const deleteOTP = async (attempt) => {
+    try {
+      const OTP = await OTPModel.findOneAndDelete({ email });
+      console.log(OTP); //-------- DEBUGGING
+    } catch (error) {
+      console.error(`Error deleting OTP on attempt ${attempt}:`, error);
+      if (attempt < maxRetries) {
+        // Wait a short time before retrying
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+        return deleteOTP(attempt + 1);
+      } else {
+        throw new Error("Failed to delete OTP after multiple retries");
+      }
+    }
+  };
+
+  // Call the retry function for OTP deletion
+  let deletedOTP;
+  try {
+    deletedOTP = await deleteOTP(1); // Start with attempt 1
+  } catch (error) {
+    console.error("Error deleting OTP:", error);
+    return res.json({ error: "Failed to resend OTP" });
+  }
+
+  // create a new one and store in DB
+  // Send email to user with the reset password link
+  const transporter = nodemailer.createTransport({
+    // senders email and password
+    service: "gmail",
+    auth: {
+      user: process.env.EMAIL_FROM,
+      pass: process.env.EMAIL_PASSWORD,
+    },
+  });
+
+  // Generate OTP at random
+  const newOTP = Math.floor(100000 + Math.random() * 900000);
+
+  // Email data to be sent
+  const emailData = {
+    from: `Nova study notes ${process.env.EMAIL_FROM}`,
+    to: email,
+    subject: "Password Reset Link from Nova",
+    html: `
+      <div style = "background: linear-gradient(180deg, #001125 0%, #002755 100%); padding: 50px">
+      <div style= "padding: 20px;">
+      <h1 style="color: white;"> Hey there! </h1>
+      </ br>
+      <h3 style="color:white;"> Use this code to reset your password and get back on your study notes. </h3>
+      <p style="color: #B4B4B8"> If you didn't request for an OTP, you can safely ignore it </p>
+      </ br>
+      </div>
+      <div style="padding: 20px;">
+      <span style="color:#0F0F0F; font-size: 40px; font-family: Lucida Console; background-color: #5CB1FF; border-radius: 10px; padding: 20px;">
+      ${newOTP}
+      </span>
+      </div>
+      </div>
+    `,
+  };
+
+  // store the OTP in the DB
+  const otp = await OTPModel.create({
+    email,
+    code: newOTP,
+  });
+
+  if (!otp) {
+    return res.json({ error: "Cannot generate OTP" });
+  }
+
+  transporter.sendMail(emailData, (err, info) => {
+    if (err) {
+      return res.json({ error: err.message });
+    }
+
+    return res.json({ message: `OTP has been sent 📨` });
+  });
 });
 
 /**
@@ -243,4 +367,5 @@ module.exports = {
   resetPassword,
   verifyOTP,
   deleteOTP,
+  resendOTP,
 };

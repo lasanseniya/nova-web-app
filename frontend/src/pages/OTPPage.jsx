@@ -11,8 +11,7 @@ function OTPPage() {
     otp: "",
   });
 
-  const handleOTP = async (e) => {
-    e.preventDefault();
+  const handleOTP = async () => {
     const { email, otp } = data;
 
     const response = await axios.post("/verify-otp", {
@@ -30,50 +29,36 @@ function OTPPage() {
     }
   };
 
-  const handleResendOtp = async (e) => {
-    e.preventDefault();
+  const handleResendOtp = async () => {
     const email = localStorage.getItem("email");
-    // remove the existing OTP from database
-    try {
-      const response = await axios.delete(`/delete-otp/${email}`);
 
-      if (response.data.error) {
-        toast.error(response.data.error);
-      } else {
-        // resend a new otp to email
-        const resendResponse = await axios.post("/forgot-password", {
-          email,
-        });
+    const { data } = await axios.post("/resend-otp", {
+      email,
+    });
 
-        if (resendResponse.data.error) {
-          toast.error(resendResponse.data.error);
-        } else {
-          toast.success("OTP has been sent 📨");
-        }
-      }
-    } catch (error) {
-      toast.error("error");
+    if (data.error) {
+      toast.error("Cannot resend atm. Please try again later.");
+    } else {
+      toast.success(data.message);
     }
   };
 
   return (
     <>
-      <form onSubmit={handleOTP}>
-        <InputBox
-          id="otp"
-          placeholder="Enter your OTP"
-          name="otp"
-          type="text"
-          value={data.otp}
-          onChange={(e) =>
-            setData({
-              ...data,
-              otp: e.target.value,
-            })
-          }
-        ></InputBox>
-        <button type="submit">Verify OTP</button>
-      </form>
+      <InputBox
+        id="otp"
+        placeholder="Enter your OTP"
+        name="otp"
+        type="text"
+        value={data.otp}
+        onChange={(e) =>
+          setData({
+            ...data,
+            otp: e.target.value,
+          })
+        }
+      ></InputBox>
+      <button onClick={handleOTP}>Verify OTP</button>
       <button onClick={handleResendOtp}>Resend OTP</button>
     </>
   );

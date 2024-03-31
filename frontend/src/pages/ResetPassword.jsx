@@ -17,6 +17,11 @@ function ResetPassword() {
 
     const { email, password, conf_pwd } = data;
 
+    if (password == "" || conf_pwd == "") {
+      toast.error("Please fill in both fields!");
+      return;
+    }
+
     if (password !== conf_pwd) {
       toast.error("Passwords do not match");
       return;
