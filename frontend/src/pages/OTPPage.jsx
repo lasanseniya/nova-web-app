@@ -55,6 +55,28 @@ function OTPPage() {
   const handleResendOtp = async () => {
     const email = localStorage.getItem("email");
 
+    if (!email) {
+      toast(
+        <button
+          onClick={() => {
+            navigate("/forgot-password");
+          }}
+          className="rounded-lg bg-blue-600 px-3.5 py-1 text-blue-50 shadow-lg hover:bg-blue-500 hover:shadow-blue-500/40 active:bg-blue-700"
+        >
+          Click me!
+        </button>,
+        {
+          icon: "👉🏼 Provide your email",
+          position: "top-center",
+          style: {
+            borderRadius: "10px",
+            background: "rgba(51.41, 51.41, 51.41, 0.78)",
+            color: "#fff",
+          },
+        },
+      );
+    }
+
     const { data } = await axios.post("/resend-otp", {
       email,
     });
@@ -125,7 +147,7 @@ function OTPPage() {
       </div>
       <button
         onClick={handleOTP}
-        className="mt-2 mt-9 flex items-center rounded-lg border-2 border-blue-500 bg-transparent p-2 text-xs tracking-wider text-white sm:text-sm"
+        className="mt-9 flex items-center rounded-lg border-2 border-blue-500 bg-transparent p-2 text-xs tracking-wider text-white sm:text-sm"
       >
         Verify OTP
       </button>
