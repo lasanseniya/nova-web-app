@@ -20,7 +20,7 @@ import ProtectedOTP from "./utils/ProtectedOTP.jsx";
 import axios from "axios";
 import ForgotPassword from "./pages/ForgotPassword.jsx";
 import PasswordReset from "./pages/ResetPassword.jsx";
-import OTPPage from "./pages/otpPage.jsx";
+import OTPPage from "./pages/OTPPage.jsx";
 
 axios.defaults.baseURL = import.meta.env.VITE_SERVER_URL;
 
