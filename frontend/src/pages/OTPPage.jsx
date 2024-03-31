@@ -38,7 +38,7 @@ function OTPPage() {
           onClick={() => {
             navigate("/forgot-password");
           }}
-          className="rounded-lg bg-blue-600 px-3.5 py-1 shadow-lg hover:bg-blue-500 hover:shadow-blue-500/40 active:bg-blue-700"
+          className="rounded-lg bg-blue-600 px-3.5 py-1 text-blue-50 shadow-lg hover:bg-blue-500 hover:shadow-blue-500/40 active:bg-blue-700"
         >
           Click me!
         </button>,
@@ -47,7 +47,7 @@ function OTPPage() {
           position: "top-center",
           style: {
             borderRadius: "10px",
-            background: "#333",
+            background: "rgba(51.41, 51.41, 51.41, 0.78)",
             color: "#fff",
           },
         },

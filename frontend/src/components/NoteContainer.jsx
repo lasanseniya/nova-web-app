@@ -16,35 +16,46 @@ function NoteContainer({ structuredNote = "", summary = "", questions = "" }) {
   async function handleSaveNote() {
     // Check if all the fields are filled with information
     if (structuredNote !== "" && summary !== "" && questions !== "") {
-      // If the note is not empty, send a POST request to the backend to save the note
       try {
         const token = localStorage.getItem("token");
-        const { data } = await axios.post(
-          "/api/notes",
+        const { data } = await toast.promise(
+          axios.post(
+            "/api/notes",
+            {
+              title: title,
+              structuredNote,
+              summary,
+              cueQuestions: questions,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            },
+          ),
           {
-            title: title,
-            structuredNote,
-            summary,
-            cueQuestions: questions,
+            loading: "Saving note...", // Display loading message
+            success: "Note saved successfully", // Display success message
+            error: (err) =>
+              err.response?.data?.error ||
+              "An error occurred while saving the note. 😵", // Display error message
           },
           {
-            headers: {
-              Authorization: `Bearer ${token}`,
+            position: "top-center",
+            style: {
+              borderRadius: "10px",
+              background: "rgba(51.41, 51.41, 51.41, 0.78)",
+              color: "#fff",
             },
           },
         );
 
-        // Display the error message on a toast
-        if (data.error) {
+        if (data && data.error) {
+          // Display the error message on a toast if present in the response
           toast.error(data.error);
-        } else {
-          // Display the success message on a toast
-          toast.success(data.message);
         }
       } catch (error) {
-        console.log(error);
-
-        // Display a toast message if an error occurred while saving the note
+        console.error(error);
         toast.error("An error occurred while saving the note. 😵");
       }
     } else {
