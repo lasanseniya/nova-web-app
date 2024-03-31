@@ -4,20 +4,19 @@ const jwt = require("jsonwebtoken");
 const validateToken = asyncHandler(async (req, res, next) => {
   let token;
 
-  // Check if token is present in headers
-  let authHeader = req.headers.Authorization || req.headers.authorization;
-
-  if (authHeader && authHeader.startsWith("Bearer")) {
-    token = authHeader.split(" ")[1];
+  // check authorization header
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer")
+  ) {
+    try {
+      token = req.headers.authorization.split(" ")[1];
+    } catch (error) {
+      console.error("Error in reading token from header");
+    }
   }
-
-  // If token is not found in headers, check cookies
-  if (!token && req.cookies.token) {
-    token = req.cookies.token;
-  }
-
-  // Verify token if found
   if (token) {
+    // Verify token if found
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
       if (err) {
         res.status(401);

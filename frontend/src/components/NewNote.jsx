@@ -37,8 +37,9 @@ function NewNote() {
     if (ytUrl && isValidYouTubeUrl(ytUrl)) {
       setLoading(true);
       await axios
-        .post(`${BASE_URL}/api/create-transcript`, { zip: ytUrl })
-
+        .post(`${import.meta.env.VITE_SERVER_URL}/api/create-transcript`, {
+          zip: ytUrl,
+        })
         .then((res) => {
           strucutreTranscriptWithLlm(res.data);
         })

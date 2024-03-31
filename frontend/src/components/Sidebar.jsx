@@ -1,23 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { SlArrowLeft, SlArrowRight } from "react-icons/sl";
 import { VscAdd } from "react-icons/vsc";
 import { TfiFiles } from "react-icons/tfi";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../../context/userContext";
-import { useContext } from "react";
 
 function Sidebar() {
   const [isVisible, setIsVisible] = useState(false);
-  const { setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    axios.post("/logout");
-    localStorage.removeItem("user");
-    setUser(null);
-    navigate("/");
+    localStorage.removeItem("token");
+    navigate("/login");
   };
 
   return (

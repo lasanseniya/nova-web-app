@@ -18,12 +18,21 @@ function NoteContainer({ structuredNote = "", summary = "", questions = "" }) {
     if (structuredNote !== "" && summary !== "" && questions !== "") {
       // If the note is not empty, send a POST request to the backend to save the note
       try {
-        const { data } = await axios.post("/api/notes", {
-          title: title,
-          structuredNote,
-          summary,
-          cueQuestions: questions,
-        });
+        const token = localStorage.getItem("token");
+        const { data } = await axios.post(
+          "/api/notes",
+          {
+            title: title,
+            structuredNote,
+            summary,
+            cueQuestions: questions,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        );
 
         // Display the error message on a toast
         if (data.error) {
