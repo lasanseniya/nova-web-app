@@ -8,7 +8,7 @@ function Error401() {
 
   useEffect(() => {
     const redirectTimeout = setTimeout(() => {
-      navigate("/");
+      navigate("/login");
     }, 4000);
 
     return () => {

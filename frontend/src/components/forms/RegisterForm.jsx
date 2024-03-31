@@ -50,7 +50,7 @@ function RegisterForm() {
       } else {
         setData({});
         toast.success("User registered successfully");
-        navigate("/");
+        navigate("/login");
       }
     } catch (error) {
       console.log(error);
@@ -103,7 +103,7 @@ function RegisterForm() {
         />
       </div>
       <h3 className="cursor-pointer py-5 text-right text-[13px] underline underline-offset-1">
-        <a href="/">Already have an account?</a>
+        <a href="/login">Already have an account?</a>
       </h3>
 
       <div>
