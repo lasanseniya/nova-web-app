@@ -1,19 +1,15 @@
-import { useNavigate } from "react-router-dom";
-import InputBox from "../components/forms/InputBox";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 
-function ForgotPassword() {
+const CenteredForm = () => {
   const navigate = useNavigate();
 
-  const [data, setData] = useState({
-    email: "",
-  });
+  const [email, setEmail] = useState("");
 
   const handleForgotPwd = async (e) => {
     e.preventDefault();
-    const { email } = data;
 
     try {
       const { data } = await axios.post("/forgot-password", {
@@ -28,31 +24,48 @@ function ForgotPassword() {
         navigate("/OTP-page");
       }
     } catch (error) {
-      toast.error("An error occured. Please try again later.");
+      toast.error("An error occurred. Please try again later.");
     }
   };
 
   return (
-    <div>
-      <h2> ForgotPassword </h2>
-      <form onSubmit={handleForgotPwd}>
-        <InputBox
-          id="email"
-          placeholder="Enter your Email"
-          name="email"
+    <div className="min-h-screen items-center justify-center bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-[#2a4472] via-[#031f54] to-[#000714]">
+      <div
+        className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform rounded-xl bg-blue-200 p-12"
+        style={{
+          width: "90%",
+          maxWidth: "410px",
+          height: "340px",
+          margin: "20px auto",
+        }}
+      >
+        <h1 className="mb-4 text-center text-2xl font-bold">
+          OTP verification
+        </h1>
+        <p className="mb-4 text-center">
+          A 6-digit verification code will be sent to the provided email below.
+        </p>
+
+        <input
           type="email"
-          value={data.email}
-          onChange={(e) =>
-            setData({
-              ...data,
-              email: e.target.value,
-            })
-          }
-        ></InputBox>
-        <button type="submit">Get OTP</button>
-      </form>
+          id="email"
+          name="email"
+          placeholder="User Name/ Email"
+          className="mb-4 mt-4 w-full rounded-md border border-gray-300 px-3 py-2"
+          required
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <button
+          type="submit"
+          className="w-full rounded-md bg-black px-4 py-2 text-white"
+          onClick={handleForgotPwd}
+        >
+          Request OTP
+        </button>
+      </div>
     </div>
   );
-}
+};
 
-export default ForgotPassword;
+export default CenteredForm;
