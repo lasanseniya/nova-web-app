@@ -63,14 +63,14 @@ function ResetPassword() {
   return (  
     <div className="flex py-16 bg-gradient-to-b from-slate-900 via-indigo-900 to-slate-900 h-screen justify-center items-center">
       <div className="flex flex-col justify-center items-center bg-gray-400 rounded-lg w-full max-w-[600px] md:w-[450px] h-[500px] p-8">
-        <div className="bg-blue-400 text-sm text-black w-[220px] h-[200px] rounded-md mt-[100px] mr-[150px]">
+        <div className="bg-blue-400 text-sm text-black w-[220px] h-[50px] rounded-md mt-[100px] mr-[150px]">
           Please enter your new <br/> password below and confirm
         </div>
         <ImageCard />
 
         <form className="flex flex-col items-center text-sm w-[300px] mb-[100px]" onSubmit={handlePasswordReset}>
-        <InputBox 
-          className="bg-white text-gray-900 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 w-full"
+        <InputBox
+          className="bg-white text-gray-900 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 w-full mb-4"
           id="password"
           placeholder="Enter your new password"
           name="password"
@@ -83,8 +83,9 @@ function ResetPassword() {
             })
           }
         ></InputBox>
+        <br/>
         <InputBox 
-          className="bg-white text-gray-900 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 w-full"
+          className="bg-white text-gray-900 focus:outline-none focus:shadow-outline border border-gray-300 rounded py-2 px-4 w-full mb-4"
           id="conf_pwd"
           placeholder="Enter confirm password"
           name="confirm"
@@ -92,6 +93,7 @@ function ResetPassword() {
           value={data.conf_pwd}
           onChange={(e) => setData({ ...data, conf_pwd: e.target.value })}
         />
+        <br/>
         <button className="bg-black hover:bg-black text-white font-bold py-2 px-6 w-full rounded focus:outline-none focus:shadow-outline text-xs" type="submit">
           Change Password
         </button>
