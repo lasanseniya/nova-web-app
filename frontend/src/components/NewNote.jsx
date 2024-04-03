@@ -6,7 +6,6 @@ import { toast } from "react-hot-toast";
 
 // LLM Model const variables
 const API_KEY = import.meta.env.VITE_API_KEY;
-const BASE_URL = import.meta.env.VITE_BASE_URL;
 
 const systemMessage = {
   role: "system",
@@ -46,7 +45,14 @@ function NewNote() {
         .catch((err) => console.log(err));
     } else {
       setLoading(false);
-      toast.error("Invalid YouTube URL 😵");
+      toast.error("Invalid YouTube URL 🙁", {
+        position: "top-center",
+        style: {
+          borderRadius: "10px",
+          background: "rgba(51.41, 51.41, 51.41, 0.78)",
+          color: "#fff",
+        },
+      });
     }
   };
 

@@ -57,7 +57,7 @@ function Sidebar() {
       </div>
 
       <div
-        className={`absolute left-56 top-1/2 cursor-pointer rounded-full bg-[#040D12] p-4 text-white  sm:hidden
+        className={`absolute left-56 top-1/2 cursor-pointer rounded-full bg-[#040D12] p-4 text-white sm:hidden
         ${isVisible ? "ml-0" : "ml-7"}`}
         onClick={() => {
           setIsVisible(!isVisible);

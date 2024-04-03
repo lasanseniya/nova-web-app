@@ -49,10 +49,24 @@ function NoteViewer({
     );
 
     if (data.error) {
-      toast.error(data.error);
+      toast.error(data.error, {
+        position: "top-center",
+        style: {
+          borderRadius: "10px",
+          background: "rgba(51.41, 51.41, 51.41, 0.78)",
+          color: "#fff",
+        },
+      });
     } else {
       // Display the success message on a toast
-      toast.success("Successfully Updated the note. 🫡");
+      toast.success("Successfully Updated the note. 🫡", {
+        position: "top-center",
+        style: {
+          borderRadius: "10px",
+          background: "rgba(51.41, 51.41, 51.41, 0.78)",
+          color: "#fff",
+        },
+      });
     }
   };
   return (
