@@ -17,14 +17,35 @@ const CenteredForm = () => {
       });
 
       if (data.error) {
-        toast.error(data.error);
+        toast.error(data.error, {
+          position: "top-center",
+          style: {
+            borderRadius: "10px",
+            background: "rgba(51.41, 51.41, 51.41, 0.78)",
+            color: "#fff",
+          },
+        });
       } else {
-        toast.success("OTP has been sent 📨");
+        toast.success("OTP has been sent 📨", {
+          position: "top-center",
+          style: {
+            borderRadius: "10px",
+            background: "rgba(51.41, 51.41, 51.41, 0.78)",
+            color: "#fff",
+          },
+        });
         localStorage.setItem("email", email);
         navigate("/OTP-page");
       }
     } catch (error) {
-      toast.error("An error occurred. Please try again later.");
+      toast.error("An error occurred. Please try again later.", {
+        position: "top-center",
+        style: {
+          borderRadius: "10px",
+          background: "rgba(51.41, 51.41, 51.41, 0.78)",
+          color: "#fff",
+        },
+      });
     }
   };
 

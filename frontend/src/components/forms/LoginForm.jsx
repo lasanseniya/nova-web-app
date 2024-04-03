@@ -21,17 +21,38 @@ function LoginForm() {
         password,
       });
       if (data.error) {
-        toast.error(data.error);
+        toast.error(data.error, {
+          position: "top-center",
+          style: {
+            borderRadius: "10px",
+            background: "rgba(51.41, 51.41, 51.41, 0.78)",
+            color: "#fff",
+          },
+        });
       } else {
         setData({});
         // store token in local storage
         localStorage.setItem("token", data.token);
 
-        toast.success("Successfully logged in!");
+        toast.success("Successfully logged in!", {
+          position: "top-center",
+          style: {
+            borderRadius: "10px",
+            background: "rgba(51.41, 51.41, 51.41, 0.78)",
+            color: "#fff",
+          },
+        });
         navigate("/dashboard");
       }
     } catch (error) {
-      toast.error("An error occured. Please try again later.");
+      toast.error("An error occured. Please try again later.", {
+        position: "top-center",
+        style: {
+          borderRadius: "10px",
+          background: "rgba(51.41, 51.41, 51.41, 0.78)",
+          color: "#fff",
+        },
+      });
     }
   };
 

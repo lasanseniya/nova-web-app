@@ -53,7 +53,14 @@ function MyNotes() {
       setButtons((prevButtons) =>
         prevButtons.filter((note) => note._id !== deleteButtonId),
       );
-      toast.success("Note deleted successfully");
+      toast.success("Note deleted successfully", {
+        position: "top-center",
+        style: {
+          borderRadius: "10px",
+          background: "rgba(51.41, 51.41, 51.41, 0.78)",
+          color: "#fff",
+        },
+      });
     } catch (error) {
       console.error("Error deleting note:", error);
     }

@@ -34,7 +34,14 @@ function RegisterForm() {
     const { username, email, password, conf_pwd } = data;
 
     if (password !== conf_pwd) {
-      toast.error("Passwords do not match");
+      toast.error("Passwords do not match", {
+        position: "top-center",
+        style: {
+          borderRadius: "10px",
+          background: "rgba(51.41, 51.41, 51.41, 0.78)",
+          color: "#fff",
+        },
+      });
       return;
     }
 
@@ -46,10 +53,24 @@ function RegisterForm() {
       });
 
       if (data.error) {
-        toast.error(data.error);
+        toast.error(data.error, {
+          position: "top-center",
+          style: {
+            borderRadius: "10px",
+            background: "rgba(51.41, 51.41, 51.41, 0.78)",
+            color: "#fff",
+          },
+        });
       } else {
         setData({});
-        toast.success("User registered successfully");
+        toast.success("User registered successfully", {
+          position: "top-center",
+          style: {
+            borderRadius: "10px",
+            background: "rgba(51.41, 51.41, 51.41, 0.78)",
+            color: "#fff",
+          },
+        });
         navigate("/login");
       }
     } catch (error) {

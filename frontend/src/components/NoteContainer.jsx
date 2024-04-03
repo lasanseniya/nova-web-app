@@ -52,21 +52,42 @@ function NoteContainer({ structuredNote = "", summary = "", questions = "" }) {
 
         if (data && data.error) {
           // Display the error message on a toast if present in the response
-          toast.error(data.error);
+          toast.error(data.error, {
+            position: "top-center",
+            style: {
+              borderRadius: "10px",
+              background: "rgba(51.41, 51.41, 51.41, 0.78)",
+              color: "#fff",
+            },
+          });
         }
       } catch (error) {
         console.error(error);
-        toast.error("An error occurred while saving the note. 😵");
+        toast.error("An error occurred while saving the note. 😵", {
+          position: "top-center",
+          style: {
+            borderRadius: "10px",
+            background: "rgba(51.41, 51.41, 51.41, 0.78)",
+            color: "#fff",
+          },
+        });
       }
     } else {
       // Display a toast message if the note is empty
-      toast.error("Feels a little empty 😒");
+      toast.error("Feels empty, try generating first 😒", {
+        position: "top-center",
+        style: {
+          borderRadius: "10px",
+          background: "rgba(51.41, 51.41, 51.41, 0.78)",
+          color: "#fff",
+        },
+      });
     }
   }
 
   return (
     <>
-      <div className="mr-12 mt-3 flex items-center justify-end">
+      <div className="mb-4 mr-12 mt-3 flex items-center justify-end sm:mb-0">
         <input
           type="text"
           placeholder="Enter note title..."
@@ -80,26 +101,26 @@ function NoteContainer({ structuredNote = "", summary = "", questions = "" }) {
         {/* Button to save the note */}
         <button
           onClick={handleSaveNote}
-          className="top-1 rounded-lg bg-blue-600 px-3.5 py-1 shadow-lg hover:bg-blue-500 hover:shadow-blue-500/40"
+          className="top-1 rounded-lg bg-blue-600 px-3 py-1 shadow-lg hover:bg-blue-500 hover:shadow-blue-500/40 sm:mb-0"
         >
           Save Note
         </button>
       </div>
       <div className="flex-1 overflow-y-scroll p-6 sm:grid sm:grid-cols-3 sm:grid-rows-10 sm:gap-4">
         <div className="col-span-1 row-span-10 overflow-y-scroll rounded-md border border-dashed bg-[#F5F7F8] p-2 text-slate-900">
-          <div className="text-center text-2xl font-bold leading-loose text-slate-900">
+          <div className="text-center text-base font-bold leading-loose text-slate-900 sm:text-2xl">
             Questions
           </div>
           {questionsWithStyles}
         </div>
-        <div className="col-span-2 row-span-7 overflow-y-scroll rounded-md border border-dashed bg-[#F5F7F8] p-2 text-slate-900">
-          <div className="text-center text-2xl font-bold leading-loose text-slate-900">
+        <div className="col-span-2 row-span-7 mt-3 overflow-y-scroll rounded-md border border-dashed bg-[#F5F7F8] p-2 text-slate-900 sm:mt-0">
+          <div className="text-center text-base font-bold leading-loose text-slate-900 sm:text-2xl">
             Structured Note
           </div>
           {structuredNoteWithStyles}
         </div>
-        <div className="col-span-2 col-start-2 row-span-3 row-start-8 overflow-y-scroll rounded-md border  border-dashed bg-[#F5F7F8] p-2 text-slate-900">
-          <div className="text-center text-2xl font-bold leading-loose text-slate-900">
+        <div className="col-span-2 col-start-2 row-span-3 row-start-8 mt-3 overflow-y-scroll rounded-md border border-dashed  bg-[#F5F7F8] p-2 text-slate-900 sm:mt-0">
+          <div className="text-center text-base font-bold leading-loose text-slate-900 sm:text-2xl">
             Summary
           </div>
           {summaryWithStyles}

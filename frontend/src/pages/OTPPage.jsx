@@ -82,9 +82,23 @@ function OTPPage() {
     });
 
     if (data.error) {
-      toast.error("Cannot resend atm. Please try again later.");
+      toast.error("Cannot resend atm. Please try again later.", {
+        position: "top-center",
+        style: {
+          borderRadius: "10px",
+          background: "rgba(51.41, 51.41, 51.41, 0.78)",
+          color: "#fff",
+        },
+      });
     } else {
-      toast.success(data.message);
+      toast.success(data.message, {
+        position: "top-center",
+        style: {
+          borderRadius: "10px",
+          background: "rgba(51.41, 51.41, 51.41, 0.78)",
+          color: "#fff",
+        },
+      });
     }
   };
 
