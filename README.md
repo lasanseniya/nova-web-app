@@ -134,17 +134,12 @@ Generating study notes for solo and self learners from thier favourite YouTube s
 <br />
 
 ## Contributors
+<a href="https://github.com/lasanseniya"> @lasanseniya </a>
 
-<center>
-</a> <a href="https://github.com/lasanseniya">
-<img src="https://avatars.githubusercontent.com/u/142675267?v=4" width="70" style="border-radius: 50%; margin-right:10px; border: 4px solid #2192FF" />
-<a href="https://github.com/chamathAn">
-<img src="https://avatars.githubusercontent.com/u/124298134?v=4" width="70" style="border-radius: 50%; margin-right:10px; border: 4px solid #2192FF" />
-</a> <a href="https://github.com/SavindiSilva">
-<img src="https://avatars.githubusercontent.com/u/133585903?v=4" width="70" style="border-radius: 50%; margin-right:10px; border: 4px solid #2192FF" />
-</a> <a href="https://github.com/Ranidhip">
-<img src="https://avatars.githubusercontent.com/u/143928117?v=4" width="70" style="border-radius: 50%; margin-right:10px; border: 4px solid #2192FF" />
-</a> <a href="https://github.com/kusalpathirage">
-<img src="https://avatars.githubusercontent.com/u/120313639?v=4" width="70" style="border-radius: 50%; border: 4px solid #2192FF" />
-</a>
-</center>
+<a href="https://github.com/SavindiSilva"> @savindisilva </a>
+
+<a href="https://github.com/Ranidhip"> @ranidhiperera </a>
+
+<a href="https://github.com/chamathAn"> @chamathmunasinghe </a>
+
+<a href="https://github.com/kusalpathirage"> @kusalpathirage </a>
