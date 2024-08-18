@@ -32,7 +32,6 @@ Generating study notes for solo and self learners from thier favourite YouTube s
 | react-dom         | cypress      |
 | react-router-dom  | eslint       |
 | react-hot-toast   | vite         |
-
 | react-icons  
 | react-spinners
 
@@ -45,7 +44,6 @@ Generating study notes for solo and self learners from thier favourite YouTube s
 | dotenv                |
 | express               |
 | express-async-handler |
-
 | jsonwebtoken  
 | mongoose  
 | node-fetch
