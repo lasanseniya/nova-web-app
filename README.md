@@ -2,8 +2,6 @@
 
 ## NOVA - YouTube study notes generator
 
-![deployment](https://img.shields.io/website?url=https%3A%2F%2Fnova-web-app.vercel.app%2F)
-
 </center>
 
 ### Description:
